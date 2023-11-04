@@ -8,11 +8,12 @@ function App() {
   const [messageReceived, setMessageReceived] = useState("");
   const sendMessage =()=> {
     console.log("Button clicked");
-    socket.emit("send_message", { message: "Hello from client" });
+    socket.emit("send_message", { message: message });
   }
+  
   useEffect(() => {
     socket.on("receive_message", (data) => {
-      alert(data.message);
+      setMessageReceived(data.message);
     });
   }, [socket]);
 
