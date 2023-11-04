@@ -8,7 +8,7 @@ conversationRouter.get("/:id", async (req, res) => {
     try {
         const conversation = await Conversation.find({members:{$in:[req.params.id]}, 
         })
-            res.status(201).json(response);
+            res.status(201).json(conversation);
 
         } catch(err){
             return res.status(500).json(err)
@@ -23,8 +23,8 @@ conversationRouter.post("/", async (req, res) => {
     });
 
     try{ 
-        const savedConversation = await newConversation.save()
-        res.status(201).json(response);
+        const savedConversation = await newConversation.save();
+        res.status(201).json(savedConversation);
 
     } catch(err){
         return res.status(500).json(err)
