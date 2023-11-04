@@ -5,7 +5,8 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 3,
-        maxlength: 30
+        maxlength: 30,
+        trim: true
     },  
 
     email: {
@@ -13,7 +14,9 @@ const UserSchema = new mongoose.Schema({
         required: true,
         minlength: 3,
         maxlength: 200,
-        unique: true
+        unique: true,
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
+        trim: true
     },
 
     password: {
@@ -21,33 +24,10 @@ const UserSchema = new mongoose.Schema({
         required: true,
         minlength: 3,
         maxlength: 1024,
-    },
-
-
-
-
-/* 
-    tags: [{
-        type: String
-    }],
-
-    img: {
-        type: String,
-       
-    },
-    cityId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'City'
-    }, 
-    location: {
-        lat: { type: Number},
-        lng: { type: Number},
-        address: { type: String}
-      }, */
-     
-    
+        trim: true
+    }  
 }, {timestamps: true})
 
-const DanceDB = mongoose.model("DanceDB", UserSchema)
+const User = mongoose.model("User", UserSchema)
 
-export default DanceDB
+export default User
