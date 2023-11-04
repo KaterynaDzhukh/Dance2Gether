@@ -2,7 +2,7 @@ import express from "express";
 import 'dotenv/config';
 import client from "./db/db.js";
 import cors from "cors";
-import UserRouter from "./Routes/userRoute.js"
+import registrationRouter from "./Routes/registrationRouter.js"
 
 
 
@@ -10,7 +10,9 @@ const app = express();
 
 app.use(express.json());
 
-app.use("/api/users", UserRouter)
+
+app.use("/api/registration", registrationRouter)
+
 
 app.get("/", (req, res) => {
     res.send ("Welcome to our Dance2Gether Chat")
