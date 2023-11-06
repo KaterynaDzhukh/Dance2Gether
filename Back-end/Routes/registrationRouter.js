@@ -20,6 +20,16 @@ registerRouter.get("/", async (req, res)=> {
   }
 })
 
+registerRouter.get("/:id", async(req, res)=> {
+    try {
+        const id = req.params.id
+      const response = await User.findById(id);
+      res.json(response)
+    } catch(err){
+        res.status(500).json(err);
+    }
+});
+
 
 registerRouter.post("/", async (req, res) => {
     const {userName, email, password} = req.body;
