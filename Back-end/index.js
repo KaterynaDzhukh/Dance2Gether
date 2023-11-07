@@ -9,6 +9,7 @@ import socket from "./socket.js";
 import danceRouter from "./Routes/danceRouter.js";
 import cityRouter from "./Routes/cityRouter.js";
 import genderRouter from "./Routes/genderRouter.js";
+import updateProfileRouter from "./Routes/updateProfileRouter.js";
 
 
 
@@ -28,6 +29,7 @@ app.use(express.json());
 
 app.use("/api/registration", registrationRouter)
 app.use("/api/conversation", conversationRouter)
+app.use("/api/updateProfile", updateProfileRouter)
 app.use("/api/messages", messagesRouter)
 app.use("/api/dances", danceRouter)
 app.use("/api/cities", cityRouter)
