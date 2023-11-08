@@ -47,11 +47,11 @@ const UserSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'City'
     },
-    morePictures: [{
+    morePicture: {
         type: String,
         required: true,
         trim: true
-    }],
+    },
     gender_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Gender'

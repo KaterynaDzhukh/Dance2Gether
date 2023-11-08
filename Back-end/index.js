@@ -11,6 +11,7 @@ import cityRouter from "./Routes/cityRouter.js";
 import genderRouter from "./Routes/genderRouter.js";
 import updateProfileRouter from "./Routes/updateProfileRouter.js";
 import profileRouter from "./Routes/profilePage.js";
+import myProfileRouter from "./Routes/myProfileRouter.js";
 
 
 
@@ -36,6 +37,7 @@ app.use("/api/dances", danceRouter)
 app.use("/api/cities", cityRouter)
 app.use("/api/genders", genderRouter)
 app.use("/api/profile", profileRouter)
+app.use("/api/myProfile", myProfileRouter)
 
 app.get("/", (req, res) => {
     res.send ("Welcome to our Dance2Gether Chat")
