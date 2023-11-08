@@ -1,5 +1,6 @@
 import express from "express";
 import User from "../models/UserModel.js";
+import multer from "multer";
 
 const updateProfileRouter = express.Router();
 
@@ -27,7 +28,20 @@ updateProfileRouter.get("/:id", async(req, res)=> {
 
 
 //Update information after registration
-updateProfileRouter.put("/:id", middlewareUpdateFunction, async (req, res, next) => {
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+    cb(null, "../src/images/");
+    },
+    filename: function (req, file, cb) {
+const uniquSuffix=Date.now();
+    cb(null, uniquSuffix + file.originalname)
+    }
+})
+
+const upload = multer({ storage: storage })
+
+
+updateProfileRouter.put("/:id", middlewareUpdateFunction, upload.single('image'), async (req, res, next) => {
     const id = req.params.id
     const {aboutMe, profilePicture, morePictures, dance_id, city_id, gender_id} = req.body;
     try {
