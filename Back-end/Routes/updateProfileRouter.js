@@ -14,19 +14,6 @@ if(!aboutMe|| !profilePicture || !morePictures || !dance_id ||!city_id || !gende
 }
 }
 
-//Get User by ID after Registration
-updateProfileRouter.get("/:id", async(req, res)=> {
-    try {
-    const {id} = req.params
-    console.log(id)
-    const response = await User.findById(id)
-    res.json(response)
-    } catch(err){
-        res.status(500).json(err);
-    }
-});
-
-
 //Update information after registration
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
