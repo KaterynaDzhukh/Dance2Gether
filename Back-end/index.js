@@ -9,6 +9,7 @@ import socket from "./socket.js";
 import danceRouter from "./Routes/danceRouter.js";
 import cityRouter from "./Routes/cityRouter.js";
 import genderRouter from "./Routes/genderRouter.js";
+import searchRouter from "./Routes/searchRouter.js";
 
 
 const app = express();
@@ -31,6 +32,7 @@ app.use("/api/messages", messagesRouter)
 app.use("/api/dances", danceRouter)
 app.use("/api/cities", cityRouter)
 app.use("/api/genders", genderRouter)
+app.use("/api/search", searchRouter)
 
 app.get("/", (req, res) => {
     res.send ("Welcome to our Dance2Gether Chat")
