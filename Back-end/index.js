@@ -5,6 +5,9 @@ import cors from "cors";
 import registrationRouter from "./Routes/registrationRouter.js"
 import conversationRouter from "./Routes/conversation.js"
 import messagesRouter from "./Routes/messages.js"
+import articleRouter from "./Routes/article.js"
+import reviewRouter from "./Routes/reviewRouter.js"
+import sliderRouter from "./Routes/sliderRouter.js";
 import socket from "./socket.js";
 
 
@@ -25,6 +28,9 @@ app.use(express.json());
 app.use("/api/registration", registrationRouter)
 app.use("/api/conversation", conversationRouter)
 app.use("/api/messages", messagesRouter)
+app.use("/api/article", articleRouter)
+app.use("/api/review", reviewRouter)
+app.use("/api/slider", sliderRouter)
 
 app.get("/", (req, res) => {
     res.send ("Welcome to our Dance2Gether Chat")
