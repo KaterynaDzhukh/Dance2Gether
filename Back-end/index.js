@@ -44,6 +44,8 @@ app.use("/api/cities", cityRouter)
 app.use("/api/genders", genderRouter)
 app.use("/api/profile", profileRouter)
 app.use("/api/myProfile", myProfileRouter)
+app.use("/api/profile", profileRouter)
+app.use("/api/myProfile", myProfileRouter)
 
 app.get("/", (req, res) => {
     res.send ("Welcome to our Dance2Gether Chat")
