@@ -1,10 +1,25 @@
 import "./App.css";
-import { useEffect, useState } from "react";
-import io from "socket.io-client";
-const socket = io.connect("http://localhost:3000");
+import { useContext } from "react";
+import{Routes, Route, Navigate } from 'react-router-dom'
+import Messenger from "./pages/Messenger";
+import Home from "./pages/Home";
+import { AuthContext } from "./contex/AuthContex";
 
 function App() {
-  const [message, setMessage] = useState('')
+  const { user } = useContext(AuthContext);
+return (
+      <>
+        <div>
+    <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/messenger" element= {user ? <Navigate to="/" /> : <Messenger />}/>
+  </Routes>
+  </div>
+  </>
+)}
+
+
+ /* {const [message, setMessage] = useState('')
   const [messageReceived, setMessageReceived] = useState("");
   const sendMessage =()=> {
     console.log("Button clicked");
@@ -30,7 +45,9 @@ function App() {
         Message: {messageReceived}</h1>
     </div>
   );
-}
+}}*/
+
+
 
 export default App;
 

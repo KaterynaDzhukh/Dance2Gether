@@ -9,6 +9,13 @@ import articleRouter from "./Routes/article.js"
 import reviewRouter from "./Routes/reviewRouter.js"
 import sliderRouter from "./Routes/sliderRouter.js";
 import socket from "./socket.js";
+import danceRouter from "./Routes/danceRouter.js";
+import cityRouter from "./Routes/cityRouter.js";
+import genderRouter from "./Routes/genderRouter.js";
+import updateProfileRouter from "./Routes/updateProfileRouter.js";
+import profileRouter from "./Routes/profilePage.js";
+import myProfileRouter from "./Routes/myProfileRouter.js";
+
 
 
 const app = express();
@@ -27,10 +34,16 @@ app.use(express.json());
 
 app.use("/api/registration", registrationRouter)
 app.use("/api/conversation", conversationRouter)
+app.use("/api/updateProfile", updateProfileRouter)
 app.use("/api/messages", messagesRouter)
 app.use("/api/article", articleRouter)
 app.use("/api/review", reviewRouter)
 app.use("/api/slider", sliderRouter)
+app.use("/api/dances", danceRouter)
+app.use("/api/cities", cityRouter)
+app.use("/api/genders", genderRouter)
+app.use("/api/profile", profileRouter)
+app.use("/api/myProfile", myProfileRouter)
 
 app.get("/", (req, res) => {
     res.send ("Welcome to our Dance2Gether Chat")
