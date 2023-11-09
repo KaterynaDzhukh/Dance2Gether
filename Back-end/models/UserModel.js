@@ -33,24 +33,25 @@ const UserSchema = new mongoose.Schema({
     }],
     aboutMe: {
         type: String,
-        required: false,
+        required: true,
+        minlength: 1,
         maxlength: 100,
         trim: true
     },
     profilePicture: {
         type: String,
-        required: false,
+        required: true,
         trim: true
     },
     city_id: {  
         type: mongoose.Schema.Types.ObjectId,
         ref: 'City'
     },
-    morePictures: [{
+    morePicture: {
         type: String,
-        required: false,
+        required: true,
         trim: true
-    }],
+    },
     gender_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Gender'

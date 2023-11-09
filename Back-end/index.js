@@ -12,7 +12,14 @@ import socket from "./socket.js";
 import danceRouter from "./Routes/danceRouter.js";
 import cityRouter from "./Routes/cityRouter.js";
 import genderRouter from "./Routes/genderRouter.js";
+<<<<<<< HEAD
 import searchRouter from "./Routes/searchRouter.js";
+=======
+import updateProfileRouter from "./Routes/updateProfileRouter.js";
+import profileRouter from "./Routes/profilePage.js";
+import myProfileRouter from "./Routes/myProfileRouter.js";
+
+>>>>>>> Anna_FrontEnd
 
 
 const app = express();
@@ -31,6 +38,7 @@ app.use(express.json());
 
 app.use("/api/registration", registrationRouter)
 app.use("/api/conversation", conversationRouter)
+app.use("/api/updateProfile", updateProfileRouter)
 app.use("/api/messages", messagesRouter)
 app.use("/api/article", articleRouter)
 app.use("/api/review", reviewRouter)
@@ -38,7 +46,12 @@ app.use("/api/slider", sliderRouter)
 app.use("/api/dances", danceRouter)
 app.use("/api/cities", cityRouter)
 app.use("/api/genders", genderRouter)
+<<<<<<< HEAD
 app.use("/api/search", searchRouter)
+=======
+app.use("/api/profile", profileRouter)
+app.use("/api/myProfile", myProfileRouter)
+>>>>>>> Anna_FrontEnd
 
 app.get("/", (req, res) => {
     res.send ("Welcome to our Dance2Gether Chat")
