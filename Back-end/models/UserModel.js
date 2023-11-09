@@ -6,7 +6,8 @@ const UserSchema = new mongoose.Schema({
         required: true,
         minlength: 3,
         maxlength: 30,
-        trim: true
+        trim: true,
+        unique: true
     },  
 
     email: {
@@ -25,7 +26,35 @@ const UserSchema = new mongoose.Schema({
         minlength: 3,
         maxlength: 1024,
         trim: true
-    }  
+    },
+     dance_id: [ {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Dance'
+    }],
+    aboutMe: {
+        type: String,
+        required: false,
+        maxlength: 100,
+        trim: true
+    },
+    profilePicture: {
+        type: String,
+        required: false,
+        trim: true
+    },
+    city_id: {  
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'City'
+    },
+    morePictures: [{
+        type: String,
+        required: false,
+        trim: true
+    }],
+    gender_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Gender'
+    } 
 }, {timestamps: true})
 
 const User = mongoose.model("User", UserSchema)

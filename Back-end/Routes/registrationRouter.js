@@ -20,14 +20,32 @@ registerRouter.get("/", async (req, res)=> {
   }
 })
 
+registerRouter.get("/:id", async(req, res)=> {
+    try {
+        const id = req.params.id
+      const response = await User.findById(id);
+      res.json(response)
+    } catch(err){
+        res.status(500).json(err);
+    }
+});
+
 
 registerRouter.post("/", async (req, res) => {
     const {userName, email, password} = req.body;
     try {
-        //Hash the password before saving to DB
+        const username= await User.findOne({userName});
+        if(username){
+            return res.status(400).send('User already exists.');
+        }
+        const userEmail= await User.findOne({email});
+        if(userEmail){
+            return res.status(400).send('Email already in use.');
+        }
         const hashedPassword = await bcrypt.hash(password, 10);
         const response = await User.create({userName, email, password: hashedPassword});
         res.status(201).json(response);
+        res.redirect('/api/updateProfile/')
 
     } catch(err){
         return res.status(500).json(err)
@@ -46,10 +64,11 @@ registerRouter.post("/login", async (req, res) => {
         }
         const token = generateToken({email: user.email});
         res.json({token})
-        //console.log(token)
-
+        res.redirect('/loggedIn');
     } catch(err){
-        return res.status(500).json(err)
+        res.status(500).json(err)
+        res.redirect('back');
+
     }
 })
 
