@@ -4,32 +4,34 @@ import axios from 'axios';
 
 
 const Registration=()=> {
-      const navigate = useNavigate();
+    const navigate = useNavigate();
+    const [userName, setUserName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState(false);
+    const [loading, setLoading] = setState(false);
 
-const [name, setName] = useState('');
-const [email, setEmail] = useState('');
-const [password, setPassword] = useState('');
-const [submitted, setSubmitted] = useState(false);
-const [error, setError] = useState(false);
-
-const register = async(e) => {
+  const register = async(e) => {
     e.preventDefault();
-    const payload = { username, email, password };
+    const payload = { userName, email, password };
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:3000/api/register', payload, {
+      const response = await axios.post('http://localhost:3000/api/registration/', payload, {
         headers: { 'Content-Type': 'application/json' }
       });
       if(response.status === 201 ){
+        setSubmitted(true);
         setTimeout(() => {
             navigate('/updateProfile');
         }, 3000);
       }
-  }catch(error){
-    console.log("Error to fetch data");
-  }finally{
-  setLoading(false)
-} 
+    }catch(error){
+      setError(true);
+    console.log("Could not fetch data.");
+    }finally{
+    setLoading(false)
+    } 
   }
 
   return (
