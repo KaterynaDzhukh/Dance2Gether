@@ -13,10 +13,10 @@ import danceRouter from "./Routes/danceRouter.js";
 import cityRouter from "./Routes/cityRouter.js";
 import genderRouter from "./Routes/genderRouter.js";
 import searchRouter from "./Routes/searchRouter.js";
+
 import updateProfileRouter from "./Routes/updateProfileRouter.js";
 import profileRouter from "./Routes/profilePage.js";
 import myProfileRouter from "./Routes/myProfileRouter.js";
-
 
 
 const app = express();
