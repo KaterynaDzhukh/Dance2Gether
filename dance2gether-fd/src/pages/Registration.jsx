@@ -10,15 +10,15 @@ const Registration=()=> {
     const [password, setPassword] = useState('');
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
-    const [loading, setLoading] = setState(false);
+    const [loading, setLoading] = useState(false);
 
   const register = async(e) => {
     e.preventDefault();
     const payload = { userName, email, password };
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:3000/api/registration/', payload, {
-        headers: { 'Content-Type': 'application/json' }
+      const response = await axios.post('http://localhost:3000/api/registration', payload, {
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
       });
       if(response.status === 201 ){
         setSubmitted(true);
@@ -40,11 +40,11 @@ const Registration=()=> {
     <form onSubmit={register}>
        <div className="input-container">
          <label>Enter a username</label>
-         <input onChange={(e) => setUsername(e.target.value)} type="text" required />
+         <input onChange={(e) => setUserName(e.target.value)} type="text" required />
        </div>
        <div className="input-container">
          <label>Enter your email</label>
-         <input onChange={(e) => setUsername(e.target.value)}  type="text"  required />
+         <input onChange={(e) => setEmail(e.target.value)}  type="text"  required />
        </div>
        <div className="input-container">
          <label>Enter a password</label>

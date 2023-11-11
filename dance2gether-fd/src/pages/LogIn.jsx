@@ -15,7 +15,7 @@ const loginForm =async(e)=>{
     setLoading(true);
 try {
         const response = await axios.post('http://localhost:3000/api/registration/login', payload, {
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
         });
         console.log('response')
         const { token } = response.data;
