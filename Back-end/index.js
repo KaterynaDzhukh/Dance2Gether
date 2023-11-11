@@ -13,12 +13,7 @@ import danceRouter from "./Routes/danceRouter.js";
 import cityRouter from "./Routes/cityRouter.js";
 import genderRouter from "./Routes/genderRouter.js";
 import searchRouter from "./Routes/searchRouter.js";
-
-import updateProfileRouter from "./Routes/updateProfileRouter.js";
-import profileRouter from "./Routes/profilePage.js";
-import myProfileRouter from "./Routes/myProfileRouter.js";
-
-
+import profileRouter from "./Routes/profileRouter.js";
 const app = express();
 const server = socket(app);
 
@@ -35,7 +30,6 @@ app.use(express.json());
 
 app.use("/api/registration", registrationRouter)
 app.use("/api/conversation", conversationRouter)
-app.use("/api/updateProfile", updateProfileRouter)
 app.use("/api/messages", messagesRouter)
 app.use("/api/article", articleRouter)
 app.use("/api/review", reviewRouter)
@@ -45,7 +39,7 @@ app.use("/api/cities", cityRouter)
 app.use("/api/genders", genderRouter)
 app.use("/api/search", searchRouter)
 app.use("/api/profile", profileRouter)
-app.use("/api/myProfile", myProfileRouter)
+
 
 app.get("/", (req, res) => {
     res.send ("Welcome to our Dance2Gether Chat")
