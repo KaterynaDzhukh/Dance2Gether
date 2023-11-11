@@ -30,7 +30,6 @@ registerRouter.get("/:id", async(req, res)=> {
     }
 });
 
-
 registerRouter.post("/", async (req, res) => {
     const {userName, email, password} = req.body;
     try {
@@ -45,7 +44,7 @@ registerRouter.post("/", async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         const response = await User.create({userName, email, password: hashedPassword});
         res.status(201).json(response);
-        res.redirect('/api/updateProfile/')
+        //res.redirect('/update/:id')
 
     } catch(err){
         return res.status(500).json(err)
