@@ -13,7 +13,6 @@ const Registration=()=> {
     const [loading, setLoading] = useState(false);
 
   const register = async(e) => {
-    console.log('hey')
     e.preventDefault();
     const payload = { userName, email, password };
     setLoading(true);
