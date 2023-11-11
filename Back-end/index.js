@@ -13,7 +13,7 @@ import danceRouter from "./Routes/danceRouter.js";
 import cityRouter from "./Routes/cityRouter.js";
 import genderRouter from "./Routes/genderRouter.js";
 import searchRouter from "./Routes/searchRouter.js";
-import profileRouter from "./Routes/profileRouter.js";
+
 const app = express();
 const server = socket(app);
 
