@@ -5,11 +5,12 @@ import Home from "./pages/Home";
 import SearchUser from "./pages/SearchUser.jsx";
 import Registration from "./pages/Registration.jsx";
 import LogIn from "./pages/LogIn.jsx";
-import UserContextProvider from "./context/UserContext.jsx";
+// import UserContextProvider from "./context/UserContext.jsx";
+// import { useContext } from "react";
 
 
 
-  const { user } = useContext(UserContextProvider);
+  // const { login } = useContext(UserContextProvider);
 
 function App() {
 return (

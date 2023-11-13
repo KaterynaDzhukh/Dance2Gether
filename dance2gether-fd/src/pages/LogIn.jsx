@@ -1,6 +1,7 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import UserContext from "../context/UserContext.jsx";
 
 const LogIn=()=> {
  const navigate = useNavigate();
@@ -8,28 +9,34 @@ const LogIn=()=> {
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
+    const {login} = useContext(UserContext) 
+console.log(login)
+    const loginForm = async (e) => {
+        e.preventDefault();
+        login(email, password, setLoading, setLoggedIn)
+    }
 
-const loginForm =async(e)=>{
-    e.preventDefault();
-    const payload = { email, password };
-    setLoading(true);
-try {
-        const response = await axios.post('http://localhost:3000/api/registration/login', payload, {
-        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-        });
-        console.log('response')
-        const { token } = response.data;
-        sessionStorage.setItem('jwt', token);
-        setLoggedIn(true);
-        setTimeout(() => {
-        navigate('/');
-        }, 3000);
-}catch(error){
-    console.log("Could not fetch data.");
-}finally{
-    setLoading(false)
-} 
-}
+// const login =async(e)=>{
+//     e.preventDefault();
+//     const payload = { email, password };
+//     setLoading(true);
+// try {
+//         const response = await axios.post('http://localhost:3000/api/registration/login', payload, {
+//         headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+//         });
+//         console.log('response')
+//         const { token } = response.data;
+//         sessionStorage.setItem('jwt', token);
+//         setLoggedIn(true);
+//         setTimeout(() => {
+//         navigate('/');
+//         }, 3000);
+// }catch(error){
+//     console.log("Could not fetch data.");
+// }finally{
+//     setLoading(false)
+// } 
+// }
 
   return (
     <div>
