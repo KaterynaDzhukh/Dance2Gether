@@ -5,13 +5,16 @@ import Home from "./pages/Home";
 import SearchUser from "./pages/SearchUser.jsx";
 import Registration from "./pages/Registration.jsx";
 import LogIn from "./pages/LogIn.jsx";
+import NavBar from "./pages/NavBar.jsx";
 import UpdateProfile from "./pages/UpdateProfile.jsx"
 import UserProfile from "./pages/UserProfile.jsx";
+
 
 
 function App() {
 return (
       <>
+    <NavBar />
     <Routes>
         <Route path="/" element={<Home/>} /> 
         <Route path="/messenger" element= { <Messenger />}/> 
