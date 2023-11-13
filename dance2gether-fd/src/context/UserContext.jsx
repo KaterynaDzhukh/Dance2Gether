@@ -1,19 +1,19 @@
-import { createContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { createContext, useState } from "react";
+// import { useNavigate } from "react-router-dom";
 
-export const UserContext = createContext(null);
+// export const UserContext = createContext(null);
 
-const UserContextProvider = ({children}) => {
-    const [userInfo, setUserInfo] = useState(null);
-    const [isAuth, setIsAuth] = useState(false);
+// const UserContextProvider = ({children}) => {
+//     const [userInfo, setUserInfo] = useState(null);
+//     const [isAuth, setIsAuth] = useState(false);
 
-    const login
+//     const login
 
-    return(
-        <UserContext.Provider value={value}> {children} </UserContext.Provider>
-    )
-}
+//     return(
+//         <UserContext.Provider value={value}> {children} </UserContext.Provider>
+//     )
+// }
 
 
 
-export default UserContextProvider
+// export default UserContextProvider
