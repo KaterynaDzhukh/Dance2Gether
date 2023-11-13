@@ -1,7 +1,7 @@
 import { useEffect, useState,useContext } from "react";
 import Conversation from '../components/Conversation'
 import Message from "../components/Message";
-import { AuthContext } from "../contex/AuthContex";
+import { AuthContext } from "../context/AuthContex";
 import axios from "axios";
 import io from "socket.io-client";
 const socket = io.connect("http://localhost:3000");
