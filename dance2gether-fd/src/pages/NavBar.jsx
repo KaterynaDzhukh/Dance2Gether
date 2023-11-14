@@ -26,6 +26,18 @@ const NavBar = () => {
               <Nav.Link as={NavLink} to="/login" className="nav-link">
                 Log-In
               </Nav.Link>
+              <Nav.Link as={NavLink} to="/homepagelogin" className="nav-link">
+                MyHomepage
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="/searchUser" className="nav-link">
+                Search
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="/messenger" className="nav-link">
+                Messages
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="/updateProfile/:id" className="nav-link">
+                Profile
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
           </Container>

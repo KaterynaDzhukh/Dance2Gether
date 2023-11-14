@@ -6,6 +6,10 @@ import Image from 'react-bootstrap/Image';
 const Slider = () => {
   const [slider, setSlider] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [index, setIndex] = useState(0);
+  const handleSelect = (selectedIndex) => {
+    setIndex(selectedIndex);
+  };
 
   useEffect(() => {
     getFetch();
@@ -34,6 +38,7 @@ const Slider = () => {
 
 
   return (
+
     <div>
       {loading ? (
         <p>Loading...</p>
@@ -41,19 +46,18 @@ const Slider = () => {
         <Carousel>
           {slider.map((slide) => (
             <Carousel.Item key={slide.sliderImage}>
-              
-              <Image src={slide.sliderImage} fluid />;
-              
+              <Image src={slide.sliderImage} fluid className="d-block"
+                 />
               <Carousel.Caption>
-                <h3>{slide.title}</h3> {/* Assuming there's a 'title' property */}
-                <p>{slide.description}</p> {/* Assuming there's a 'description' property */}
+                <h3>Dance2Gether</h3> 
+                <p>Dance2Gether</p> 
               </Carousel.Caption>
             </Carousel.Item>
           ))}
         </Carousel>
       )}
     </div>
-  );
+  )
 };
 
 export default Slider;
