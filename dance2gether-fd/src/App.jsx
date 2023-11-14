@@ -17,6 +17,9 @@ import { useContext } from "react";
 import NavBar from "./pages/NavBar.jsx";
 import UpdateProfile from "./pages/UpdateProfile.jsx"
 import UserProfile from "./pages/UserProfile.jsx";
+import MyHomePage from "./pages/MyHomePage.jsx";
+import AboutUs from "./pages/AboutUs.jsx";
+
 
 
 
@@ -27,6 +30,8 @@ return (
     <NavBar />
     <Routes>
         <Route path="/" element={<Home/>} /> 
+        <Route path="/about" element={<AboutUs/>} /> 
+        <Route path="/homepagelogin" element={<MyHomePage/>} /> 
         <Route path="/messenger" element= { <Messenger />}/> 
         <Route path="/register" element={<Registration/>} />
         <Route path="/login" element={<LogIn/>} />
