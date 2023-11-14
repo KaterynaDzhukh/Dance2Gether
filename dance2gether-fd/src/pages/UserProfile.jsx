@@ -58,9 +58,6 @@ useEffect(()=>{
             </div>
             )):null}
         </div>
-        <div>
-        <img src ={`${userInfo.morePicture}`} width='50%' />
-        </div>
         </> 
         )}
         </div>

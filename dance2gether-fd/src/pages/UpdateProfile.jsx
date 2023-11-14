@@ -7,14 +7,17 @@ import axios from "axios";
 const UpdateProfile=()=> {
     const { id } = useParams();
     const navigate = useNavigate();
-    const [update, setUpdate] = useState({});
-    const [profilePicture, setProfilePicture] = useState('');
+    const [aboutMe, setAboutMe] = useState()
+    const [city_id, setCity_Id] = useState('')
+    const [gender_id, setGender_Id] = useState('')
+    const [dance_id, setDance_Id] = useState('')
+    const [profilePicture, setProfilePicture] = useState(null);
     const [cities, setCities] = useState([]);
     const [dances, setDances] = useState([]);
     const [genders, setGenders] = useState([]);
-    const [morePicture, setMorePicture] = useState('');
     const [loading, setLoading] = useState(false);
 
+    //Get all cities
 const getCities = async() =>{
     setLoading(true);
     try{
@@ -28,6 +31,8 @@ const getCities = async() =>{
         setLoading(false)
 } 
 }
+
+//Get all dance styles
 const getDances = async() =>{
     setLoading(true);
     try{
@@ -41,6 +46,7 @@ const getDances = async() =>{
         setLoading(false)
 } 
 }
+//Get all genders
 const getGenders = async() =>{
     setLoading(true);
     try{
@@ -60,27 +66,26 @@ useEffect(()=>{
     getGenders([])
 }, [])
 
+console.log(profilePicture)
+console.log(city_id.cityName)
+console.log(aboutMe)
+
+
 
 const updateForm =async(e)=>{
     console.log('hey')
     e.preventDefault();
     setLoading(true);
+const formData = new FormData();
+    formData.append('profilePicture', profilePicture);
+    formData.append('aboutMe', aboutMe);
+    formData.append('city_id', city_id);
+    formData.append('gender_id', gender_id);
+    formData.append('dance_id', dance_id);
 try{
-    const newProfileInformation={
-    userId:user_.id,
-    aboutMe:aboutMe,
-    profilePicture:profilePicture,
-    city: city_id,
-    danceStyle:dance_id,
-    gender:gender_id,
-    morePicture:morePicture
-}
-//updateInformation.push(newProfileInformation)
-        const response = await axios.put(`http://localhost:3000/api/profile/update/${id}`,newProfileInformation, {
-        headers: { 'Content-Type': 'application/json', "Content-Type": "multipart/form-data",  'Access-Control-Allow-Origin': '*' }
-        }, {body:JSON.stringify({data})});
-        const data = await response.json();
-        console.log(response)
+        const response = await axios.put(`http://localhost:3000/api/profile/update/${id}`, formData, {
+        headers: {'Accept': 'application/json', "Content-Type": "multipart/form-data"  }});
+        console.log(response.data)
 
 }catch(error){
         console.log("Could not fetch data.");
@@ -91,31 +96,31 @@ try{
 
 
     return (
-       <div>
-           <h3>Update your Profile Information</h3>
+    <div>
+        <h3>Update your Profile Information</h3>
 
-       <form onSubmit={updateForm}>
-       <div className="input-container">
+    <form  onSubmit={updateForm}>
+    <div className="input-container">
             <label>Upload Profile Image</label>
-            <input type="file" accept="image/*" onChange={(event) => setProfilePicture(event.target.files)} />
+            <input type="file"  name="picturePfofile" onChange={(event) => setProfilePicture(event.target.files[0])} />
         </div>
        <div className="input-container">
        <p>Enter you city</p>
             <select>
-            <option value="">--Please choose an option--</option>
+            <option value="city">--Please choose an option--</option>
             {cities.length ? 
-            cities.map(city => (
-            <option value={city._id}>{city.cityName}</option>
+            cities.map((city, index) => (
+            <option value={city._id} key ={index}>{city.cityName}</option>
             )):null}
             </select>
         </div>
         <div className="input-container">
         <p>Choose your dance styles </p>
             <select>
-            <option value="">--Please choose an option--</option>
+            <option value="danceStyle">--Please choose an option--</option>
             {dances.length ? 
-            dances.map(dance => (
-            <option value={dance._id}>{dance.danceName}</option>
+            dances.map((dance, index) => (
+            <option value={dance._id} key ={index}>{dance.danceName}</option>
             )):null}
             </select>
         </div>
@@ -126,16 +131,12 @@ try{
           <div className="input-container">
             <p>You are:</p>
             <select>
-            <option value="">--Please choose an option--</option>
+            <option value="gender">--Please choose an option--</option>
             {genders.length ? 
-            genders.map(gender => (
-            <option value={gender._id}>{gender.gender}</option>
+            genders.map((gender, index) => (
+            <option value={gender._id} key ={index}> {gender.gender} </option>
             )):null}
             </select>
-          </div>
-          <div className="input-container">
-            <label>Add one more Picture:</label>
-            <input type="file" accept="image/*" onChange={(event) => setMorePicture(event.target.files)} />
           </div>
           <div className="button-container">
             <button type="submit">Save</button> 

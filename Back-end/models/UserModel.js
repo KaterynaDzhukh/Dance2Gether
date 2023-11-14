@@ -19,7 +19,6 @@ const UserSchema = new mongoose.Schema({
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
         trim: true
     },
-
     password: {
         type: String,
         required: true,
@@ -27,7 +26,7 @@ const UserSchema = new mongoose.Schema({
         maxlength: 1024,
         trim: true
     },
-     dance_id: [ {
+    dance_id: [ {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Dance'
     }],
@@ -39,18 +38,12 @@ const UserSchema = new mongoose.Schema({
         trim: true
     },
     profilePicture: {
-        type: String,
-        required: false,
-        trim: true
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'Image'
     },
     city_id: {  
         type: mongoose.Schema.Types.ObjectId,
         ref: 'City'
-    },
-    morePicture: {
-        type: String,
-        required: false,
-        trim: true
     },
     gender_id: {
         type: mongoose.Schema.Types.ObjectId,
@@ -60,4 +53,5 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", UserSchema)
 
-export default User
+export default User;
+

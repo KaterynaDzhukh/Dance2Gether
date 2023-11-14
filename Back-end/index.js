@@ -13,15 +13,16 @@ import danceRouter from "./Routes/danceRouter.js";
 import cityRouter from "./Routes/cityRouter.js";
 import genderRouter from "./Routes/genderRouter.js";
 import searchRouter from "./Routes/searchRouter.js";
-
+import profileRouter from "./Routes/profileRouter.js"
 const app = express();
 const server = socket(app);
 
 app.use(
   cors({
     origin: "http://localhost:5173",
+   // "Access-Control-Allow-Origin": "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"],
+    allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials", "Accept"],
     credentials: true,
   })
 )
