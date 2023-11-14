@@ -1,46 +1,48 @@
+import axios from "axios";
 import React, { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const UserContext = createContext();
+ export const UserContext = createContext();
 
-export const UserContextProvider = ({children}) => {
+ const UserProvider = ({children}) => {
     const navigate = useNavigate();
     const [token, setToken] = useState(sessionStorage.getItem('token') || null);
     const [user, setUser] = useState(null);
 
-    const login =async(email, password, setLoading, setLoggedIn)=>{
-    const payload = { email, password };
-    setLoading(true);
-try {
-        const response = await axios.post('http://localhost:3000/api/registration/login', payload, {
-        headers: { 'Content-Type': 'application/json'}
-        });
-        console.log('response')
-        const { token, user } = response.data;
-        sessionStorage.setItem('token', token);
-        setUser(user)
-        setLoggedIn(true);
-        setTimeout(() => {
-        navigate('/');
-        }, 3000);
-}catch(error){
-    console.log("Could not fetch data.");
-}finally{
-    setLoading(false)
-} 
-}
+    const login = async(email, password, setLoading, setLoggedIn) => {
+         const payload = { email, password };
+        setLoading(true);
+        try {
+            const response = await axios.post('http://localhost:3000/api/registration/login', payload, {
+            headers: { 'Content-Type': 'application/json'}
+            });
+            console.log('response')
+            const { token } = response.data.token;
+             sessionStorage.setItem('token', token);
+             setToken(token)
+             setUser(response.data.user)
+            setLoggedIn(true);
+            setTimeout(() => {
+            navigate('/');
+            }, 3000);
+        }catch(error){
+            console.log("Could not fetch data.");
+        }finally{
+            setLoading(false)
+        } 
+    }
 
     const logout = () => {
         sessionStorage.removeItem('token');
         setUser(null);
         setToken(null);
         navigate('/login');
+        setLoggedIn(false)
     }
     return(
-        <UserContext.Provider value={{user, token, login, logout}}> {children} </UserContext.Provider>
+        <UserContext.Provider value={{login}}> {children} </UserContext.Provider>
     )
 }
 
+export default UserProvider
 
-
-// export default UserContextProvider

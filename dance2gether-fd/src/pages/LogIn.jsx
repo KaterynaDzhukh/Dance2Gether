@@ -1,7 +1,6 @@
-import axios from "axios";
 import React, { useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import UserContext from "../context/UserContext.jsx";
+import {UserContext} from "../context/UserContext.jsx";
 
 const LogIn=()=> {
  const navigate = useNavigate();
@@ -10,7 +9,7 @@ const LogIn=()=> {
     const [loading, setLoading] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
     const {login} = useContext(UserContext) 
-console.log(login)
+
     const loginForm = async (e) => {
         e.preventDefault();
         login(email, password, setLoading, setLoggedIn)
