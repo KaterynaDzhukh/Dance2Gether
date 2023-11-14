@@ -5,9 +5,19 @@ import Home from "./pages/Home";
 import SearchUser from "./pages/SearchUser.jsx";
 import Registration from "./pages/Registration.jsx";
 import LogIn from "./pages/LogIn.jsx";
+
+import UserProvider from "./context/UserContext.jsx";
+import { useContext } from "react";
+
+
+
+  // const { user } = useContext(UserProvider);
+
+
 import NavBar from "./pages/NavBar.jsx";
 import UpdateProfile from "./pages/UpdateProfile.jsx"
 import UserProfile from "./pages/UserProfile.jsx";
+
 
 
 

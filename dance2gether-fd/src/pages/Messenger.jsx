@@ -1,15 +1,16 @@
 import { useEffect, useState,useContext } from "react";
 import Conversation from '../components/Conversation'
 import Message from "../components/Message";
-import { AuthContext } from "../context/AuthContex";
 import axios from "axios";
 import io from "socket.io-client";
+import { UserContext } from "../context/UserContext";
 const socket = io.connect("http://localhost:3000");
+
 
  const Messenger=() => {
   const [conversations, setConversations] = useState([]);
 
-  const{user}=useContext(AuthContext)
+  const{user}=useContext(UserContext)
   console.log(user)
 
   
