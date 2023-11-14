@@ -14,6 +14,7 @@ if(!aboutMe|| !profilePicture || !morePicture || !dance_id ||!city_id || !gender
 }
 }
 
+
 //Update information after registration
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -48,7 +49,7 @@ profileRouter.put("/update/:id", middlewareUpdateFunction, upload.single('image'
 //Get Users Profile
 profileRouter.get("/", async(req, res)=> {
     try {
-    const response = await User.find()
+    const response = await User.find().populate('city_id').populate('dance_id').populate('gender_id')
     if(!response){
         res.status(404).json({message: "Users do not exist"})
     }
@@ -62,7 +63,7 @@ profileRouter.get("/", async(req, res)=> {
 profileRouter.get("/:id", async(req, res)=> {
     try {
     const {id} = req.params
-    const response = await User.findById(id)
+    const response = await User.findById(id).populate('city_id').populate('dance_id').populate('gender_id')
     if(!response){
         res.status(404).json({message: "User does not exist"})
     }

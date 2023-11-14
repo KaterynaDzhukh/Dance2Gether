@@ -39,4 +39,20 @@ articleRouter.post("/", async (req, res, next) => {
     }
 }, handleErrors);
 
+articleRouter.get("/:id", async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const response = await Article.findById(id);
+        if(!response){
+            return next({statusCode: 400, message: "Artical does not exist"})
+        }
+        console.log(response, 'response')
+        res.json(response);
+    } catch(err){
+      //  res.status(403).json(err)
+        console.log(err)
+        return next()
+    }
+}, handleErrors);
+
 export default articleRouter;
