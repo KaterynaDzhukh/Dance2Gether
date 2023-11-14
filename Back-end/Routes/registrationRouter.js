@@ -63,7 +63,8 @@ registerRouter.post("/login", async (req, res) => {
         }
         const token = generateToken({email: user.email});
         res.json({token})
-        res.redirect('/loggedIn');
+        console.log(token)
+        //res.redirect('/homepage_logged');
     } catch(err){
         res.status(500).json(err)
         res.redirect('back');

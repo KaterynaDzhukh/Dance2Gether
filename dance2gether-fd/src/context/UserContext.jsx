@@ -17,14 +17,14 @@ import { useNavigate } from "react-router-dom";
             const response = await axios.post('http://localhost:3000/api/registration/login', payload, {
             headers: { 'Content-Type': 'application/json'}
             });
-            console.log('response')
+            console.log(response)
             const { token } = response.data.token;
              sessionStorage.setItem('token', token);
              setToken(token)
              setUser(response.data.user)
             setLoggedIn(true);
             setTimeout(() => {
-            navigate('/');
+            navigate('/homepagelogin');
             }, 3000);
         }catch(error){
             console.log("Could not fetch data.");
@@ -41,7 +41,7 @@ import { useNavigate } from "react-router-dom";
         setLoggedIn(false)
     }
     return(
-        <UserContext.Provider value={{login}}> {children} </UserContext.Provider>
+        <UserContext.Provider value={{login, logout, token, user}}> {children} </UserContext.Provider>
     )
 }
 

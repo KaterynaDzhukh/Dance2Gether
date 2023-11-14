@@ -2,8 +2,10 @@ import React from 'react';
 import axios from "axios";
 import {useEffect, useState} from 'react';
 import Card from 'react-bootstrap/Card';
+import { useNavigate } from 'react-router-dom'
 
-
+//import UserProvider from "../context/UserContext.jsx";
+//import { useContext } from "react";
 
 
 
@@ -12,8 +14,11 @@ const MyHomePage = () => {
 const [userName, setUserName] = useState([]);
 const [loading, setLoading] = useState(false);
 
+const navigate = useNavigate();
+
  
   useEffect(() => {
+  
     getFetch();
   }, []);
 
@@ -52,8 +57,8 @@ const [loading, setLoading] = useState(false);
       <>
         <div className="row row-cols-1 row-cols-md-4 g-4">
         {userName.map((users) => (
-    <Card key={users.id} style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={users.profilePicture}  />
+    <Card key={users._id} style={{ width: '18rem' }}>
+      <Card.Img variant="top" src={users.profilePicture} onClick={() =>  navigate(`/userProfile/${users._id}`)}  />
       <Card.Body>
         <Card.Title>{users.userName}</Card.Title>
         <Card.Text>

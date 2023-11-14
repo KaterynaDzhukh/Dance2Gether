@@ -5,6 +5,8 @@ import Slider from "./Slider.jsx"
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Reviews from '../components/reviews.jsx';
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -65,6 +67,11 @@ const HomepageD = () => {
         <p>Loading...</p>
       ) : (
         <> <Slider />
+        <div>
+        <Link to="/login">
+        <Button variant="danger">Join now</Button>
+        </Link>
+        </div>
           <p className="lead text-center">
             “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.”
           </p>
@@ -80,7 +87,7 @@ const HomepageD = () => {
                       ? article.articleText // Show all text if expanded
                       : `${article.articleText.slice(0, 100)}...`} {/* Show limited text with ellipsis */}
                   </Card.Text>
-                  <Button variant="primary" onClick={() => toggleExpanded(article.id)}>
+                  <Button variant="danger" onClick={() => toggleExpanded(article.id)}>
                     {expandedArticles.includes(article.id) ? 'Show Less' : 'Show More'}
                   </Button>
                 </Card.Body>
