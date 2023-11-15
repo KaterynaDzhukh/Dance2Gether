@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import {Image, ImageSchema} from "./ImageModel.js"
+
 
 const UserSchema = new mongoose.Schema({
     userName: {
@@ -37,10 +39,8 @@ const UserSchema = new mongoose.Schema({
         maxlength: 100,
         trim: true
     },
-    profilePicture: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref:'Image'
-    },
+    image: ImageSchema
+    ,
     city_id: {  
         type: mongoose.Schema.Types.ObjectId,
         ref: 'City'

@@ -26,13 +26,14 @@ return (
  <NavBar /> 
     <Routes>
         <Route path="/" element={<PrivateRoutes/>}>
-        <Route path="myHomePage" element={<MyHomePage/>} />
+
+        <Route path="/myhomepage" element={<MyHomePage/>} />
         <Route path="messenger" element= { <Messenger />}/>
         <Route path="searchUser" element={<SearchUser/>} />
         <Route path="updateProfile/:id" element={<UpdateProfile/>} />
         <Route path="myProfile" element={<MyProfile/>} />
         <Route path="userProfile/:id" element={<UserProfile/>} />
-        <Route path='*' element={<Navigate to={"/homepagelogin"} />} /> 
+        
         </Route>
         
         <Route path="/*" element={<PublicRoutes />} >

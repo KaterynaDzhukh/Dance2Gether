@@ -24,7 +24,8 @@ import { useNavigate } from "react-router-dom";
             setUser(response.data.user)
             setLoggedIn(true);
             setTimeout(() => {
-            navigate('/myHomePage');
+
+            navigate('/myhomepage');
             }, 3000);
         }catch(error){
             console.log("Could not fetch data.");
