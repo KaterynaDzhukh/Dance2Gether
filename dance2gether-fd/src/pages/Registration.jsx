@@ -17,7 +17,7 @@ const Registration=()=> {
     const payload = { userName, email, password };
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:3000/api/registration', payload, {
+      const response = await axios.post('http://localhost:3000/api/auth/register', payload, {
         headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
       });
       console.log(response)

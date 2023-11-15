@@ -1,4 +1,5 @@
 import "./App.css";
+//import { useContext } from "react";
 import{ Routes, Route, Navigate} from 'react-router-dom'
 import Messenger from "./pages/Messenger";
 import Home from "./pages/Home";
@@ -20,20 +21,20 @@ import MyProfile from './pages/MyProfile.jsx'
 function App() {
 
 return (
+  
       <>
-    
-    <NavBar />
+ <NavBar /> 
     <Routes>
         <Route path="/" element={<PrivateRoutes/>}>
         <Route index element={<MyHomePage/>} />
         <Route path="messenger" element= { <Messenger />}/>
         <Route path="searchUser" element={<SearchUser/>} />
         <Route path="updateProfile/:id" element={<UpdateProfile/>} />
-        <Route path="myProfile/:id" element={<MyProfile/>} />
+        <Route path="myProfile" element={<MyProfile/>} />
         <Route path="userProfile/:id" element={<UserProfile/>} />
         <Route path='*' element={<Navigate to={"/homepagelogin"} />} /> 
-
         </Route>
+        
         <Route path="/*" element={<PublicRoutes />} >
         <Route path="home" element={<Home/>} />
         <Route path="about" element={<AboutUs/>} /> 
@@ -42,7 +43,7 @@ return (
         <Route path="*" element={<Navigate to={'/login'} />} />
         </Route>
   </Routes>
-  
+
   </>
 )}
 

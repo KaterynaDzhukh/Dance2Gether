@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import {UserContext} from "../context/UserContext.jsx";
 
 const LogIn=()=> {
- const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
     const {login} = useContext(UserContext) 
+    const{logout} = useContext(UserContext)
 
     const loginForm = async (e) => {
         e.preventDefault();
@@ -38,7 +38,8 @@ const LogIn=()=> {
 // }
 
   return (
-    <div>
+   <>
+   <div>
         <h1>Log In</h1>
     <form onSubmit={loginForm}>
        <div className="input-container">
@@ -54,6 +55,9 @@ const LogIn=()=> {
        </div>
     </form>
     </div>
+ 
+
+</>
   )
 }
 

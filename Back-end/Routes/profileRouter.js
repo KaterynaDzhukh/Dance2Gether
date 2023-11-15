@@ -46,22 +46,18 @@ profileRouter.put("/update/:id", middlewareUpdateFunction, upload.single('profil
     }
 })
 
+//Get all users
+profileRouter.get("/",  async (req, res)=> {
+    try{
+    const response = await User.find();
+    res.json(response)
 
+} catch(err){
+    res.status(500).json(err)
+}
+})
 
-//Get Users Profile
-profileRouter.get("/", async(req, res)=> {
-    try {
-    const response = await User.find().populate('city_id').populate('dance_id').populate('gender_id')
-    if(!response){
-        res.status(404).json({message: "Users do not exist"})
-    }
-    res.status(200).json(response)
-    } catch(err){
-        res.status(500).json(err);
-    }
-});
-
-//Get User Profile
+//Get my Profile
 profileRouter.get("/:id", async(req, res)=> {
     try {
     const {id} = req.params
@@ -75,7 +71,19 @@ profileRouter.get("/:id", async(req, res)=> {
     }
 });
 
-
+//Get user Profile
+profileRouter.get("/user/:id", async(req, res)=> {
+    try {
+        const {id} = req.params
+        const response = await User.findById(id).populate('city_id').populate('dance_id').populate('gender_id')
+    if(!response){
+        res.status(404).json({message: "Users do not exist"})
+    }
+    res.status(200).json(response)
+    } catch(err){
+        res.status(500).json(err);
+    }
+});
 
 
 export default profileRouter;
