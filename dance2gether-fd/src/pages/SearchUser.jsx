@@ -106,7 +106,7 @@ const SearchUser = () => {
             {users.length ? 
               users.map((user) => (
                 <li value={user._id} key={user._id}>                   
-                    <div>{user.userName} </div>
+                    <a href={`updateProfile/${user._id}`}>{user.userName} </a>
                 </li>
               ))
               : null}
