@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import {UserContext} from "../context/UserContext.jsx";
 
 const MyHomePage = () => {
-  const {user} = useContext(UserContext);
+  const {user, token} = useContext(UserContext);
 const [users, setUsers] = useState([]);
 const [loading, setLoading] = useState(false);
 
@@ -18,12 +18,12 @@ const navigate = useNavigate();
 
 
   const getFetch = async () => {
-    console.log('hey')
+    // console.log('hey')
     try {
       setLoading(true);
      
       let config = {
-        url: "http://localhost:3000/api/profile/",
+        url: "http://localhost:3000/api/auth/",
         method: "get",
         headers: { 
           'Authorization': `Bearer ${token}`,
