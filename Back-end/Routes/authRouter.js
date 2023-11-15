@@ -3,15 +3,16 @@ import User from "../models/UserModel.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-const registerRouter = express.Router();
+const authRouter = express.Router();
 const secret = process.env.SECRET_TOKEN;
 
 const generateToken = (data) => {
     return jwt.sign(data, secret, {expiresIn: '1800s'})
 }
+
 const middlewareAuthorizationFunction = (req, res, next) => {
     //Get token from header
-    const token = req.headers.authorization;
+    const token = req.headers.authorization
     
     if(!token){
         return res.sendStatus(401)
@@ -30,7 +31,7 @@ const middlewareAuthorizationFunction = (req, res, next) => {
     })
 }
 
-registerRouter.get("/", middlewareAuthorizationFunction, async (req, res)=> {
+authRouter.get("/", async (req, res)=> {
     try{
     const response = await User.find();
     res.json(response)
@@ -40,7 +41,7 @@ registerRouter.get("/", middlewareAuthorizationFunction, async (req, res)=> {
 }
 })
 
-registerRouter.get("/:id", async(req, res)=> {
+authRouter.get("/:id", async(req, res)=> {
     try {
         const id = req.params.id
       const response = await User.findById(id);
@@ -50,7 +51,7 @@ registerRouter.get("/:id", async(req, res)=> {
     }
 });
 
-registerRouter.post("/", async (req, res) => {
+authRouter.post("/register", async (req, res) => {
     const {userName, email, password} = req.body;
     try {
         const username= await User.findOne({userName});
@@ -70,7 +71,7 @@ registerRouter.post("/", async (req, res) => {
         return res.status(500).json(err)
     }
 })
-registerRouter.post("/login", async (req, res) => {
+authRouter.post("/login", async (req, res) => {
     const { email, password} = req.body;
     try {
         const user = await User.findOne({email});
@@ -93,5 +94,16 @@ registerRouter.post("/login", async (req, res) => {
     }
 })
 
+authRouter.get("/user",middlewareAuthorizationFunction,  async (req, res) => {
+    const { email} = req.body;
+    try {
+        const user = await User.findOne({email});
+        if(!user){
+            return res.status(400).send('User not found');
+}
+}catch(err){
+        res.status(500).json(err)
+    }
+});
 
-export default registerRouter;
+export default authRouter;

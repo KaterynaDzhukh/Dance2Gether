@@ -1,10 +1,13 @@
-import React,{useEffect, useState} from 'react'
-import { useParams } from 'react-router-dom'
-import axios from 'axios'
+import React,{useEffect, useState, useContext} from 'react'
+import { useParams } from 'react-router-dom';
+//import axios from 'axios'
+//import {UserContext} from "../context/UserContext.jsx";
+
 
 
 const UserProfile=() =>{
-    const { id } = useParams();
+   // const {user} = useContext(UserContext);
+   const {id} = useParams
     const [userInfo, setUserInfo] = useState([]);
     const [loading, setLoading]=useState(false);
     const [error, setError] = useState(false);
@@ -12,7 +15,7 @@ const UserProfile=() =>{
     const [dances, setDances] = useState({});
 const getUserProfile =async()=>{
     try{
-        const response =  await axios.get(`http://localhost:3000/api/profile/${id}`, 
+        const response =  await axios.get(`http://localhost:3000/api/profile/user/${id}`, 
         {headers: {'Content-Type':'application/json', 'Access-Control-Allow-Origin': '*' }})
         console.log(response.data)
     if(response.status === 200){

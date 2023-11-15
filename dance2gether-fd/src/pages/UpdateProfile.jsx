@@ -11,11 +11,14 @@ const UpdateProfile=()=> {
     const [city_id, setCity_Id] = useState('')
     const [gender_id, setGender_Id] = useState('')
     const [dance_id, setDance_Id] = useState('')
-    const [profilePicture, setProfilePicture] = useState(null);
+    const [image, setImage] = useState([]);
     const [cities, setCities] = useState([]);
     const [dances, setDances] = useState([]);
     const [genders, setGenders] = useState([]);
+    const [file, setFile] = useState(null);
     const [loading, setLoading] = useState(false);
+
+    
 
     //Get all cities
 const getCities = async() =>{
@@ -66,7 +69,7 @@ useEffect(()=>{
     getGenders([])
 }, [])
 
-console.log(profilePicture)
+console.log(image)
 console.log(city_id.cityName)
 console.log(aboutMe)
 
@@ -77,7 +80,7 @@ const updateForm =async(e)=>{
     e.preventDefault();
     setLoading(true);
 const formData = new FormData();
-    formData.append('profilePicture', profilePicture);
+    formData.append('image', image);
     formData.append('aboutMe', aboutMe);
     formData.append('city_id', city_id);
     formData.append('gender_id', gender_id);
@@ -102,7 +105,7 @@ try{
     <form  onSubmit={updateForm}>
     <div className="input-container">
             <label>Upload Profile Image</label>
-            <input type="file"  name="picturePfofile" onChange={(event) => setProfilePicture(event.target.files[0])} />
+            <input type="file"  name="picturePfofile" onChange={(event) => setImage(event.target.files[0])} />
         </div>
        <div className="input-container">
        <p>Enter you city</p>

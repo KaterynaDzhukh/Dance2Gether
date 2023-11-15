@@ -1,19 +1,18 @@
 import React from 'react';
 import axios from "axios";
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useContext} from 'react';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom'
-
+import {UserContext} from "../context/UserContext.jsx";
 
 const MyHomePage = () => {
-const [userName, setUserName] = useState([]);
+  const {user} = useContext(UserContext);
+const [users, setUsers] = useState([]);
 const [loading, setLoading] = useState(false);
 
 const navigate = useNavigate();
 
- 
   useEffect(() => {
-  
     getFetch();
   }, []);
 
@@ -26,10 +25,13 @@ const navigate = useNavigate();
       let config = {
         url: "http://localhost:3000/api/profile/",
         method: "get",
-        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+        headers: { 
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
       };
       const response = await axios(config);
-      setUserName(response.data);
+     // setUsers(response.data);
       console.log(response.data);
     } catch (error) {
       console.log("Error fetching data:", error);
@@ -44,13 +46,13 @@ const navigate = useNavigate();
     ) : (
       <>
         <div className="row row-cols-1 row-cols-md-4 g-4">
-        {userName.map((users) => (
-    <Card key={users._id} style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={users.profilePicture} onClick={() =>  navigate(`/userProfile/${users._id}`)}  />
+        {userName.map((user, index) => (
+    <Card key={index} style={{ width: '18rem' }}>
+      <Card.Img variant="top" src={user.profilePicture} onClick={() =>  navigate(`/userProfile/${user._id}`)}  />
       <Card.Body>
-        <Card.Title>{users.userName}</Card.Title>
+        <Card.Title>{user.userName}</Card.Title>
         <Card.Text>
-        {users.aboutMe}
+        {user.aboutMe}
         </Card.Text>
       </Card.Body>
     </Card>
@@ -61,5 +63,10 @@ const navigate = useNavigate();
     </div>    
     );
 }
+
+
+
+
+
 
 export default MyHomePage;

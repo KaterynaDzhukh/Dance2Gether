@@ -2,7 +2,7 @@ import express from "express";
 import 'dotenv/config';
 import client from "./db/db.js";
 import cors from "cors";
-import registrationRouter from "./Routes/registrationRouter.js"
+import authRouter from "./Routes/authRouter.js"
 import conversationRouter from "./Routes/conversation.js"
 import messagesRouter from "./Routes/messages.js"
 import articleRouter from "./Routes/article.js"
@@ -31,7 +31,7 @@ app.use(
 
 app.use(express.json());
 
-app.use("/api/registration", registrationRouter)
+app.use("/api/auth", authRouter)
 app.use("/api/conversation", conversationRouter)
 app.use("/api/messages", messagesRouter)
 app.use("/api/article", articleRouter)

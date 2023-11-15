@@ -1,51 +1,36 @@
-import React from "react";
- import { NavLink } from 'react-router-dom'
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { NavLink } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
+import { useContext } from 'react';
+
+const Navbar = () => {
+  const {user, token, logout} = useContext(UserContext);
+
+  console.log(user, 'user', token, 'token')
 
 
-
-const NavBar = () => {
-    return (
-        <Navbar className="bg-body-tertiary" expand="lg">
-        <Container>
-          <Navbar.Brand as={NavLink} to="/"> 
-          
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-              <Nav.Link as={NavLink} to="/home" className="nav-link">
-                Home
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="/login" className="nav-link">
-                Sign-In
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="/register" className="nav-link">
-                Sigh-Up
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="/about" className="nav-link">
-                About Us
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="/homepagelogin" className="nav-link">
-                MyHomepage
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="/searchUser" className="nav-link">
-                Search
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="/messenger" className="nav-link">
-                Messages
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="myProfile/:id" className="nav-link">
-              My Account
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-          </Container>
-        </Navbar>
-      );
-    };
+  return (
+    <div>
+        <nav>
+        <div style={{display: 'flex', justifyContent: 'flex-end', gap: '3em'}}>
+                {token ? (
+                  <>
+                  <NavLink to="/homepagelogin">MyHomePage</NavLink>
+                  <NavLink to="searchUser">SearchUser</NavLink>
+                  <NavLink to="myProfile">MyProfile</NavLink>
+                  <button onClick={logout}>Logout</button>
+                  </>
+                ) : <>
+                    <NavLink to="/home">Home</NavLink>
+                    <NavLink to="/login">Sign in</NavLink>
+                    <NavLink to="/register">Sign up</NavLink>
+                    <NavLink to="/about">AboutUs</NavLink>
+                  </>
+                }
+         </div>
+        </nav>
+    </div>
     
-export default NavBar
+  )
+}
+
+export default Navbar

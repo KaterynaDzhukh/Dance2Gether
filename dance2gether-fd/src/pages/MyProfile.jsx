@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 
 const MyProfile=() =>{
-    const {user} = useContext(UserContext);
+    const {user,  logout} = useContext(UserContext);
     const navigate = useNavigate();
     const [userInfo, setUserInfo] = useState([]);
     const [loading, setLoading]=useState(false);
@@ -17,7 +17,7 @@ const MyProfile=() =>{
 const getUserProfile =async()=>{
     try{
         const response =  await axios.get(`http://localhost:3000/api/profile/${user._id}`, 
-        {headers: {'Content-Type':'application/json', 'Access-Control-Allow-Origin': '*'}})
+        {headers: {'Content-Type':'application/json',  'Access-Control-Allow-Origin': '*'}})
         console.log(response.data)
     if(response.status === 200){
         setUserInfo(response.data)
