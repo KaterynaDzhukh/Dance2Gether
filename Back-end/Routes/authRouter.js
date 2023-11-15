@@ -95,9 +95,8 @@ authRouter.post("/login", async (req, res) => {
 })
 
 authRouter.get("/user",middlewareAuthorizationFunction,  async (req, res) => {
-    const { email} = req.body;
     try {
-        const user = await User.findOne({email});
+        const user = await User.find();
         if(!user){
             return res.status(400).send('User not found');
 }

@@ -24,6 +24,7 @@ import { useNavigate } from "react-router-dom";
             setUser(response.data.user)
             setLoggedIn(true);
             setTimeout(() => {
+
             navigate('/myhomepage');
             }, 3000);
         }catch(error){
