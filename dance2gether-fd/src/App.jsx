@@ -26,6 +26,7 @@ return (
  <NavBar /> 
     <Routes>
         <Route path="/" element={<PrivateRoutes/>}>
+
         <Route path="/myhomepage" element={<MyHomePage/>} />
         <Route path="messenger" element= { <Messenger />}/>
         <Route path="searchUser" element={<SearchUser/>} />

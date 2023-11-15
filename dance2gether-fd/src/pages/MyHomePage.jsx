@@ -7,6 +7,7 @@ import {UserContext} from "../context/UserContext.jsx";
 
 const MyHomePage = () => {
   const {user, token} = useContext(UserContext);
+
 const [users, setUsers] = useState([]);
 const [loading, setLoading] = useState(false);
 
@@ -27,7 +28,7 @@ const navigate = useNavigate();
         method: "get",
         headers: { 
           'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
       };
       const response = await axios(config);
@@ -48,7 +49,7 @@ const navigate = useNavigate();
         <div className="row row-cols-1 row-cols-md-4 g-4">
         {users.map((user, index) => (
     <Card key={index} style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={user.profilePicture} onClick={() =>  navigate(`/userProfile/${user._id}`)}  />
+      <Card.Img variant="top" src={user.image} onClick={() =>  navigate(`/userProfile/${user._id}`)}  />
       <Card.Body>
         <Card.Title>{user.userName}</Card.Title>
         <Card.Text>
