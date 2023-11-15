@@ -4,11 +4,6 @@ import {useEffect, useState} from 'react';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom'
 
-//import UserProvider from "../context/UserContext.jsx";
-//import { useContext } from "react";
-
-
-
 
 const MyHomePage = () => {
 const [userName, setUserName] = useState([]);
@@ -24,15 +19,14 @@ const navigate = useNavigate();
 
 
   const getFetch = async () => {
+    console.log('hey')
     try {
       setLoading(true);
      
       let config = {
-        url: "http://localhost:3000/api/registration",
+        url: "http://localhost:3000/api/profile/",
         method: "get",
-        headers: {
-          
-        },
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
       };
       const response = await axios(config);
       setUserName(response.data);
@@ -43,12 +37,6 @@ const navigate = useNavigate();
       setLoading(false);
     }
   };
-  
-  
-    
-
-
-
   return (
     <div className="container mt-5">
     {loading ? (

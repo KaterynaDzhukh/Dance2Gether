@@ -17,14 +17,17 @@ const NavBar = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-              <Nav.Link as={NavLink} to="/" className="nav-link">
+              <Nav.Link as={NavLink} to="/home" className="nav-link">
                 Home
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="/login" className="nav-link">
+                Sign-In
+              </Nav.Link>
+              <Nav.Link as={NavLink} to="/register" className="nav-link">
+                Sigh-Up
               </Nav.Link>
               <Nav.Link as={NavLink} to="/about" className="nav-link">
                 About Us
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="/login" className="nav-link">
-                Log-In
               </Nav.Link>
               <Nav.Link as={NavLink} to="/homepagelogin" className="nav-link">
                 MyHomepage
@@ -35,8 +38,8 @@ const NavBar = () => {
               <Nav.Link as={NavLink} to="/messenger" className="nav-link">
                 Messages
               </Nav.Link>
-              <Nav.Link as={NavLink} to="/updateProfile/:id" className="nav-link">
-                Profile
+              <Nav.Link as={NavLink} to="myProfile/:id" className="nav-link">
+              My Account
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
