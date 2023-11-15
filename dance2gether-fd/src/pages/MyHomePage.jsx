@@ -31,7 +31,7 @@ const navigate = useNavigate();
         },
       };
       const response = await axios(config);
-     // setUsers(response.data);
+      setUsers(response.data);
       console.log(response.data);
     } catch (error) {
       console.log("Error fetching data:", error);
@@ -46,7 +46,7 @@ const navigate = useNavigate();
     ) : (
       <>
         <div className="row row-cols-1 row-cols-md-4 g-4">
-        {userName.map((user, index) => (
+        {users.map((user, index) => (
     <Card key={index} style={{ width: '18rem' }}>
       <Card.Img variant="top" src={user.profilePicture} onClick={() =>  navigate(`/userProfile/${user._id}`)}  />
       <Card.Body>
