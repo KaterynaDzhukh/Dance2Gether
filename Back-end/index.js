@@ -13,7 +13,9 @@ import danceRouter from "./Routes/danceRouter.js";
 import cityRouter from "./Routes/cityRouter.js";
 import genderRouter from "./Routes/genderRouter.js";
 import searchRouter from "./Routes/searchRouter.js";
-import profileRouter from "./Routes/profileRouter.js"
+import profileRouter from "./Routes/profileRouter.js";
+import homepageLoggedIn from "./Routes/homepageLoggedIn.js";
+
 const app = express();
 const server = socket(app);
 
@@ -40,6 +42,7 @@ app.use("/api/cities", cityRouter)
 app.use("/api/genders", genderRouter)
 app.use("/api/search", searchRouter)
 app.use("/api/profile", profileRouter)
+app.use("/api/homepage_logged", homepageLoggedIn)
 
 
 app.get("/", (req, res) => {

@@ -76,18 +76,6 @@ profileRouter.get("/:id", async(req, res)=> {
 });
 
 
-profileRouter.put("/myProfile/:id", async (req, res) => {
-    const id = req.params.id
-    const {userName, aboutMe, profilePicture, dance_id, city_id, gender_id} = req.body;
-    try {
-        const response = await User.findByIdAndUpdate(id,{userName, aboutMe, profilePicture, dance_id, city_id, gender_id}, {new: true}).populate('city_id').populate('dance_id').populate('gender_id')
-        if(!response){
-            res.status(404).json({message: "Please edit information"})
-        }
-        res.status(201).json(response);
-    } catch(err){
-        res.status(500).json(err)
-    }
-})
+
 
 export default profileRouter;

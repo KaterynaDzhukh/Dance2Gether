@@ -3,14 +3,16 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
-import { AuthContextProvider } from './contex/AuthContex.jsx'
+
+import UserProvider from './context/UserContext'
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+ 
     <BrowserRouter>
-    <AuthContextProvider>
+    <UserProvider>
     <App />
-    </AuthContextProvider>
+    </UserProvider>
     </BrowserRouter>
-  </React.StrictMode>,
+  
 )

@@ -9,8 +9,28 @@ const secret = process.env.SECRET_TOKEN;
 const generateToken = (data) => {
     return jwt.sign(data, secret, {expiresIn: '1800s'})
 }
+const middlewareAuthorizationFunction = (req, res, next) => {
+    //Get token from header
+    const token = req.headers.authorization;
+    
+    if(!token){
+        return res.sendStatus(401)
+    }
 
-registerRouter.get("/", async (req, res)=> {
+    const tokenData = token.split(' ')[1];
+    console.log(tokenData)
+
+    //Verify token
+    jwt.verify(tokenData, secret, (err, user) => {
+        if(err){
+            return res.sendStatus(401)
+        }
+        req.user = user;
+        next();
+    })
+}
+
+registerRouter.get("/", middlewareAuthorizationFunction, async (req, res)=> {
     try{
     const response = await User.find();
     res.json(response)
@@ -62,8 +82,10 @@ registerRouter.post("/login", async (req, res) => {
             return res.status(400).send('Password is incorrect!');
         }
         const token = generateToken({email: user.email});
-        res.json({token})
-        res.redirect('/loggedIn');
+        res.set('token', token);
+        res.set('Access-Control-Expose-Headers', 'token');
+        res.json( {token, user} );
+        //res.redirect('/homepage_logged');
     } catch(err){
         res.status(500).json(err)
         res.redirect('back');
