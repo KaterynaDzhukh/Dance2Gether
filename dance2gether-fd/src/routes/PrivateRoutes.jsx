@@ -6,7 +6,7 @@ const PrivateRoutes = () => {
 
     const {user, token} = useContext(UserContext);
 
-    return !user ? <Navigate to="/login" /> : <Outlet />
+    return !user ? <Navigate to="/home" /> : <Outlet />
 }
 
 export default PrivateRoutes

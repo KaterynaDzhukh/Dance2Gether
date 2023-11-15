@@ -12,15 +12,13 @@ import UpdateProfile from "./pages/UpdateProfile.jsx"
 import UserProfile from "./pages/UserProfile.jsx";
 import MyHomePage from "./pages/MyHomePage.jsx";
 import AboutUs from "./pages/AboutUs.jsx";
-import { useContext } from "react";
-import { UserContext } from "./context/UserContext.jsx";
-
+import MyProfile from './pages/MyProfile.jsx'
 
 
 
 
 function App() {
-const { user } = useContext(UserContext);
+
 return (
       <>
     
@@ -31,12 +29,13 @@ return (
         <Route path="messenger" element= { <Messenger />}/>
         <Route path="searchUser" element={<SearchUser/>} />
         <Route path="updateProfile/:id" element={<UpdateProfile/>} />
+        <Route path="myProfile/:id" element={<MyProfile/>} />
         <Route path="userProfile/:id" element={<UserProfile/>} />
         <Route path='*' element={<Navigate to={"/homepagelogin"} />} /> 
-       
+
         </Route>
         <Route path="/*" element={<PublicRoutes />} >
-        <Route path="" element={<Home/>} />
+        <Route path="home" element={<Home/>} />
         <Route path="about" element={<AboutUs/>} /> 
         <Route path="register" element={<Registration/>} />
         <Route path="login" element={<LogIn/>} />
