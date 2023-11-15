@@ -2,12 +2,13 @@ import express from "express";
 import User from "../models/UserModel.js";
 import multer from "multer";
 
+
 const profileRouter = express.Router();
 
 //MiddlewareFunction 
 const middlewareUpdateFunction = (req, res, next) => {
-    const {aboutMe, profilePicture, morePicture, dance_id, city_id, gender_id}= req.body; 
-if(!aboutMe|| !profilePicture || !morePicture || !dance_id ||!city_id || !gender_id){
+    const {aboutMe, profilePicture, dance_id, city_id, gender_id}= req.body; 
+if(!aboutMe|| !profilePicture  || !dance_id ||!city_id || !gender_id){
     return  res.status(403).json({error: 'Please add all information to your profile!'});
 }else{
     next()
@@ -16,24 +17,25 @@ if(!aboutMe|| !profilePicture || !morePicture || !dance_id ||!city_id || !gender
 
 
 //Update information after registration
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-    cb(null, "../src/images/");
-    },
-    filename: function (req, file, cb) {
-const uniquSuffix=Date.now();
-    cb(null, uniquSuffix + file.originalname)
-    }
-})
+const storage = multer.memoryStorage(
+    {filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now();
+    cb(null, uniqueSuffix +  file.originalname)
+}})
 
-const upload = multer({ storage: storage })
+const upload = multer({storage: storage})
 
-
-profileRouter.put("/update/:id", middlewareUpdateFunction, upload.single('image'), async (req, res, next) => {
+profileRouter.put("/update/:id", middlewareUpdateFunction, upload.single('profilePicture'), async (req, res, next) => {
+    const newImage = new Image({
+        filename: req.file.originalname,
+        contentType: req.file.mimetype,
+        imageBase64: req.file.buffer.toString('base64'),
+});
     const id = req.params.id
-    const {aboutMe, profilePicture, morePicture, dance_id, city_id, gender_id} = req.body;
+    const {aboutMe, profilePicture,  dance_id, city_id, gender_id} = req.body;
     try {
-        const response = await User.findByIdAndUpdate(id,{aboutMe, profilePicture, morePicture, dance_id, city_id, gender_id}, {new: true}).populate('city_id').populate('dance_id').populate('gender_id')
+        const response = await User.findByIdAndUpdate(id,{aboutMe, profilePicture, dance_id, city_id, gender_id}, {profilePicture: newImage},
+        {new: true}).populate('city_id').populate('dance_id').populate('gender_id')
         if(!response){
             res.status(404).json({message: "Please add all information"})
         }
@@ -72,6 +74,7 @@ profileRouter.get("/:id", async(req, res)=> {
         res.status(500).json(err);
     }
 });
+
 
 
 

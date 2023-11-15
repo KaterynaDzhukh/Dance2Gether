@@ -35,9 +35,9 @@ registerRouter.get("/", middlewareAuthorizationFunction, async (req, res)=> {
     const response = await User.find();
     res.json(response)
 
-  } catch(err){
-      res.status(500).json(err)
-  }
+} catch(err){
+    res.status(500).json(err)
+}
 })
 
 registerRouter.get("/:id", async(req, res)=> {
