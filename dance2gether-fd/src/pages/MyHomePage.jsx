@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import {UserContext} from "../context/UserContext.jsx";
 
 const MyHomePage = () => {
-  const {user} = useContext(UserContext);
+const {user, token} = useContext(UserContext);
 const [users, setUsers] = useState([]);
 const [loading, setLoading] = useState(false);
 
@@ -23,15 +23,15 @@ const navigate = useNavigate();
       setLoading(true);
      
       let config = {
-        url: "http://localhost:3000/api/profile/",
+        url: "http://localhost:3000/api/auth/",
         method: "get",
         headers: { 
           'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
       };
       const response = await axios(config);
-     // setUsers(response.data);
+      setUsers(response.data);
       console.log(response.data);
     } catch (error) {
       console.log("Error fetching data:", error);
@@ -46,9 +46,9 @@ const navigate = useNavigate();
     ) : (
       <>
         <div className="row row-cols-1 row-cols-md-4 g-4">
-        {userName.map((user, index) => (
+        {users.map((user, index) => (
     <Card key={index} style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={user.profilePicture} onClick={() =>  navigate(`/userProfile/${user._id}`)}  />
+      <Card.Img variant="top" src={user.image} onClick={() =>  navigate(`/userProfile/${user._id}`)}  />
       <Card.Body>
         <Card.Title>{user.userName}</Card.Title>
         <Card.Text>
