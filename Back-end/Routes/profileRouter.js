@@ -7,8 +7,8 @@ const profileRouter = express.Router();
 
 //MiddlewareFunction 
 const middlewareUpdateFunction = (req, res, next) => {
-    const {aboutMe, profilePicture, dance_id, city_id, gender_id}= req.body; 
-if(!aboutMe|| !profilePicture  || !dance_id ||!city_id || !gender_id){
+    const {aboutMe, image_id, dance_id, city_id, gender_id}= req.body; 
+if(!aboutMe|| !image_id  || !dance_id ||!city_id || !gender_id){
     return  res.status(403).json({error: 'Please add all information to your profile!'});
 }else{
     next()
@@ -34,7 +34,7 @@ profileRouter.put("/update/:id", middlewareUpdateFunction, upload.single('profil
     const id = req.params.id
     const {aboutMe, profilePicture,  dance_id, city_id, gender_id} = req.body;
     try {
-        const response = await User.findByIdAndUpdate(id,{aboutMe, profilePicture, dance_id, city_id, gender_id}, {profilePicture: newImage},
+        const response = await User.findByIdAndUpdate(id,{aboutMe, profilePicture, dance_id, city_id, gender_id}, {image_id: newImage},
         {new: true}).populate('city_id').populate('dance_id').populate('gender_id')
         if(!response){
             res.status(404).json({message: "Please add all information"})
