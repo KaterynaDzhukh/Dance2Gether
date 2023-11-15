@@ -5,7 +5,7 @@ import { UserContext } from '../context/UserContext';
 const PublicRoutes = () => {
 
     const {user, token} = useContext(UserContext);
-    return user ? <Navigate to="/homepagelogin" /> : <Outlet />
+    return user ? <Navigate to="/myhomepage" /> : <Outlet />
 }
 
 export default PublicRoutes
