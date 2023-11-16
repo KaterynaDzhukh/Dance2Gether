@@ -28,7 +28,7 @@ return (
         <Route path="/" element={<PrivateRoutes/>}>
 
         <Route path="myhomepage" element={<MyHomePage/>} />
-        <Route path="messenger" element= { <Messenger />}/>
+        {/* <Route path="messenger" element= { <Messenger />}/> */}
         <Route path="searchUser" element={<SearchUser/>} />
         <Route path="updateProfile/:id" element={<UpdateProfile/>} />
         <Route path="myProfile" element={<MyProfile/>} />

@@ -14,7 +14,7 @@ const Navbar = () => {
         <div style={{display: 'flex', justifyContent: 'flex-end', gap: '3em'}}>
                 {token ? (
                   <>
-                  <NavLink to="/homepagelogin">MyHomePage</NavLink>
+                  <NavLink to="myhomepage">MyHomePage</NavLink>
                   <NavLink to="searchUser">SearchUser</NavLink>
                   <NavLink to="myProfile">MyProfile</NavLink>
                   <button onClick={logout}>Logout</button>
