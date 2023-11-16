@@ -8,20 +8,24 @@ import { useParams } from 'react-router-dom';
 const UserProfile=() =>{
    // const {user} = useContext(UserContext);
    const {id} = useParams
-    const [userInfo, setUserInfo] = useState([]);
     const [loading, setLoading]=useState(false);
     const [error, setError] = useState(false);
     const [city, setCity] = useState([]);
-    const [dances, setDances] = useState({});
+    const [dances, setDances] = useState([]);
+    const [gender, setGender] = setState([]);
+    const [aboutMe, setAboutMe] = setState([]);
+    const [userName, setUserName] = setState([])
 const getUserProfile =async()=>{
     try{
-        const response =  await axios.get(`http://localhost:3000/api/profile/user/${id}`, 
+        const response =  await axios.get(`http://localhost:3000/api/api/auth/${id}`, 
         {headers: {'Content-Type':'application/json', 'Access-Control-Allow-Origin': '*' }})
         console.log(response.data)
     if(response.status === 200){
-        setUserInfo(response.data)
+        setAboutMe(response.aboutMe)
         setCity(response.data.city_id)
         setDances(response.data.dance_id)
+        setGender(response.data.gender_id)
+        setUserName(response.data.userName)
     }
 }catch(error){
     setError(true);
@@ -39,27 +43,25 @@ useEffect(()=>{
         {loading ? (
         <p>Loading...</p>) : (
     <>
-    <h2>{userInfo.userName}</h2>
+    <h2>{userName}</h2>
     <div>
-        {Object.keys(city).length ? 
-        <p>{city.cityName}</p>
-    :null}
+        {gender}, {city}
+
     </div>
         <div>
-    <img src ={`${userInfo.profilePicture}`} width='30%' />
+    {/* <img src ={`${userInfo.profilePicture}`} width='30%' /> */}
         </div>
         <div>
     <h3>About Me:</h3>
-    <p>{userInfo.aboutMe}</p>
+    <p>{aboutMe}</p>
         </div>
         <div>
-    <h3>Dance Style:</h3>
-    {dances.length ? 
-            dances.map((dance, index) => (
-                <div key = {index}>
-            <p>{dance.danceName}</p>
-            </div>
-            )):null}
+    <h3>My dance styles:</h3>
+    {dances.length ?
+              dances.map(dance => (
+                <div  value={dance._id} key={dance._id}>{dance.danceName}</div>
+              ))
+              :null}
         </div>
         </> 
         )}
