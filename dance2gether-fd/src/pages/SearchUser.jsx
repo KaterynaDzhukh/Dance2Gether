@@ -69,7 +69,10 @@ const SearchUser = () => {
             const response = await axios.get(`http://localhost:3000/api/search/${citiesSearch}/${dancesSearch}`);
             if(response.status === 200 ){
           setUsers(response.data)
-            } 
+            } {
+              const failedSearch= "Sorry, no users found. Try again later."
+              console.log(failedSearch)
+            }
         }catch(error) {
             setError(true)
             console.log("Could not fetch data.");
@@ -106,7 +109,7 @@ const SearchUser = () => {
             {users.length ? 
               users.map((user) => (
                 <li value={user._id} key={user._id}>                   
-                    <a href={`updateProfile/${user._id}`}>{user.userName} </a>
+                    <a href={`userProfile/${user._id}`}>{user.userName} </a>
                 </li>
               ))
               : null}

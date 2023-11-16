@@ -1,6 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import  UserContext  from '../context/UserContext';
+
+
 
 
 const Registration=()=> {
@@ -11,6 +14,7 @@ const Registration=()=> {
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
+    const user = useContext(UserContext)
 
   const register = async(e) => {
     e.preventDefault();
@@ -24,7 +28,7 @@ const Registration=()=> {
       if(response.status === 201 ){
         setSubmitted(true);
         setTimeout(() => {
-            navigate('/update/:id');
+            navigate('/login');
         }, 3000);
       }
     }catch(error){
@@ -52,7 +56,7 @@ const Registration=()=> {
          <input onChange={(e) => setPassword(e.target.value)} type="password"  required />
        </div>
        <div className="button-container">
-         <button type="submit">Sign Up</button>
+         <button onClick={()=> navigate(`/updateProfile/${user._id}`)} type="submit">Sign Up</button>
        </div>
     </form>
     </div>
