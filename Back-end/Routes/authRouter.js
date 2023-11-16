@@ -46,7 +46,6 @@ authRouter.get("/:id", middlewareAuthorizationFunction, async(req, res)=> {
         res.status(500).json(err);
     }
 });
-
 authRouter.post("/register", async (req, res) => {
     const {userName, email, password} = req.body;
     try {
@@ -90,13 +89,13 @@ authRouter.post("/login", async (req, res) => {
     }
 })
 
-authRouter.get('/user/:id', middlewareAuthorizationFunction, async (req, res) => {
+authRouter.get('/user/:id',  async (req, res) => {
     try {
-        const response = await User.findById(req.user.id).populate('city_id').populate('dance_id').populate('gender_id')
+        const response = await User.findById(req.params.id).populate('city_id').populate('dance_id').populate('gender_id')
         console.log(response, "response")
 
         if(!response){
-            return res.status(404).json({ message: `User with ${id} doesn't exist` })
+            return res.status(404).json({ message: 'User does not exist' })
 
         }
         res.status(200).json(response)
