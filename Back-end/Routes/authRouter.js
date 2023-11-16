@@ -13,14 +13,11 @@ const generateToken = (data) => {
 const middlewareAuthorizationFunction = (req, res, next) => {
     //Get token from header
     const token = req.headers.authorization
-    
     if(!token){
         return res.sendStatus(401)
     }
-
     const tokenData = token.split(' ')[1];
     console.log(tokenData)
-
     //Verify token
     jwt.verify(tokenData, secret, (err, user) => {
         if(err){
@@ -82,7 +79,7 @@ authRouter.post("/login", async (req, res) => {
         if(!validPassword){
             return res.status(400).send('Password is incorrect!');
         }
-        const token = generateToken({email: user.email});
+        const token = generateToken({id: user.id});
         res.set('token', token);
         res.set('Access-Control-Expose-Headers', 'token');
         res.json( {token, user} );
@@ -94,15 +91,17 @@ authRouter.post("/login", async (req, res) => {
     }
 })
 
-authRouter.get("/user",middlewareAuthorizationFunction,  async (req, res) => {
+authRouter.get("/user", middlewareAuthorizationFunction,  async (req, res) => {
+    
     try {
-        const user = await User.find();
+        const user = await User.findById(req.user.id);
         if(!user){
             return res.status(400).send('User not found');
 }
 }catch(err){
         res.status(500).json(err)
     }
+    
 });
 
 export default authRouter;

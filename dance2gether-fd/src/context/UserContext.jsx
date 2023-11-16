@@ -40,12 +40,12 @@ import { useNavigate } from "react-router-dom";
         setToken(null);
         navigate('/login');
     }
-{/*
-{useEffect(() => {
-    const fetchUserData = async () => {
-        if (token) {
+
+    {useEffect(() => {
+         const fetchUserData = async () => {
+         if (token) {
             try {
-                const response = await axios.get('http://localhost:3000/api/auth/user', {
+                const response = await axios.get('http://localhost:3000/api/auth/', {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'
@@ -54,14 +54,15 @@ import { useNavigate } from "react-router-dom";
                 console.log(response.data)
                 setUser(response.data);
             } catch (err) {
-                console.error('Failed to fetch user data:', err);
+                console.log('Failed to fetch user data:', err);
                 logout();
             }
         }
-    };
-    fetchUserData();
-}, [token]);
-*/}
+       };
+         fetchUserData();
+        }, [token]);
+    }
+
     return(
         <UserContext.Provider value={{login, logout, token, user}}> {children} </UserContext.Provider>
     )
