@@ -49,12 +49,13 @@ const navigate = useNavigate();
         <div className="row row-cols-1 row-cols-md-4 g-4">
         {users.map((user, index) => (
     <Card key={index} style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={user.image} onClick={() =>  navigate(`/userProfile/${user._id}`)}  />
+      <Card.Img variant="top" src={user.image}  />
       <Card.Body>
         <Card.Title>{user.userName}</Card.Title>
         <Card.Text>
         {user.aboutMe}
         </Card.Text>
+        <button type="submit" onClick={() => navigate(`/userProfile/${user._id}`)}>Go to Profile!</button> 
       </Card.Body>
     </Card>
    ))}
