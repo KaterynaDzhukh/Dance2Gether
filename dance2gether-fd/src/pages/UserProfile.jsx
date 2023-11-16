@@ -1,25 +1,26 @@
 import React,{useEffect, useState, useContext} from 'react'
 import axios from 'axios'
-import {UserContext} from "../context/UserContext.jsx";
-
+import {  useParams } from 'react-router-dom';
 
 
 const UserProfile=() =>{
-    const {user, token} = useContext(UserContext);
+    const { id } = useParams();
     const [userInfo, setUserInfo] = useState([]);
     const [loading, setLoading]=useState(false);
     const [error, setError] = useState(false);
     const [city, setCity] = useState([]);
+    const [genders, setGenders] = useState([]);
     const [dances, setDances] = useState({});
 const getUserProfile =async()=>{
     try{
-        const response =  await axios.get(`http://localhost:3000/api/auth/user/${user._id}`, 
-        {headers: {'Content-Type':'application/json', 'Access-Control-Allow-Origin': '*', 'Authorization': `Bearer ${token}`  }})
+        const response =  await axios.get(`http://localhost:3000/api/profile/user/${id}`, 
+        {headers: {'Content-Type':'application/json', 'Access-Control-Allow-Origin': '*' }})
         console.log(response.data)
     if(response.status === 200){
         setUserInfo(response.data)
         setCity(response.data.city_id)
         setDances(response.data.dance_id)
+        setGenders(response.data.gender_id)
     }
 }catch(error){
     setError(true);
@@ -30,7 +31,7 @@ const getUserProfile =async()=>{
 }
 useEffect(()=>{
     getUserProfile()
-}, [])
+}, [id])
 
     return (
     <div>
@@ -41,13 +42,14 @@ useEffect(()=>{
     
     <h2>{userInfo.userName}</h2>
     <div>
-        {Object.keys(city).length ? 
         <p>{city.cityName}</p>
-    :null}
     </div>
         <div>
     <img src ={`${userInfo.profilePicture}`} width='30%' />
         </div>
+    <div>
+        <p>{genders.gender}</p>
+    </div>
         <div>
     <h3>About Me:</h3>
     <p>{userInfo.aboutMe}</p>
@@ -68,3 +70,5 @@ useEffect(()=>{
 }
 
 export default UserProfile;
+
+
