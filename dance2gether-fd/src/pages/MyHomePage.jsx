@@ -32,7 +32,7 @@ const navigate = useNavigate();
         },
       };
       const response = await axios(config);
-      const loggedInUserId = user.userId;
+      const loggedInUserId = user._id;
 
       // Filter the users array to exclude the logged-in user
       const filteredUsers = response.data.filter(user => user._id !== loggedInUserId);
@@ -52,13 +52,13 @@ const navigate = useNavigate();
     ) : (
       <>
         <div className="row row-cols-1 row-cols-md-4 g-4">
-        {users.map((user, index) => (
+        {users.map((userdata, index) => (
     <Card key={index} style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={user.image} onClick={() =>  navigate(`/userProfile/${user._id}`)}  />
+      <Card.Img variant="top" src={userdata.image} onClick={() =>  navigate(`/userProfile/${userdata._id}`)}  />
       <Card.Body>
-        <Card.Title>{user.userName}</Card.Title>
+        <Card.Title>{userdata.userName}</Card.Title>
         <Card.Text>
-        {user.aboutMe}
+        {userdata.aboutMe}
         </Card.Text>
       </Card.Body>
     </Card>
