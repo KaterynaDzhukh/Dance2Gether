@@ -5,19 +5,19 @@ import { useNavigate } from 'react-router-dom'
 
 
 const MyProfile=() =>{
-    const {user,  logout} = useContext(UserContext);
+    const {user, token} = useContext(UserContext);
     const navigate = useNavigate();
     const [userInfo, setUserInfo] = useState([]);
     const [loading, setLoading]=useState(false);
     const [error, setError] = useState(false);
     const [city, setCity] = useState([]);
     const [genders, setGenders] = useState([]);
-    const [dances, setDances] = useState({});
+    const [dances, setDances] = useState([]);
     
 const getUserProfile =async()=>{
     try{
-        const response =  await axios.get(`http://localhost:3000/api/profile/${user._id}`, 
-        {headers: {'Content-Type':'application/json',  'Access-Control-Allow-Origin': '*'}})
+        const response =  await axios.get(`http://localhost:3000/api/auth/${user._id}`, 
+        {headers: {'Content-Type':'application/json',  'Access-Control-Allow-Origin': '*',  'Authorization': `Bearer ${token}`}})
         console.log(response.data)
     if(response.status === 200){
         setUserInfo(response.data)
@@ -47,15 +47,11 @@ useEffect(()=>{
     <h2>{userInfo.userName}</h2>
     <div>
     <h4>City:</h4>
-        {Object.keys(city).length ? 
         <p>{city.cityName}</p>
-    :null}
     </div>
     <div>
     <h4>Gender:</h4>
-    {Object.keys(genders).length ? 
             <p>{genders.gender}</p>
-            :null}
         </div>
 
         <div>
@@ -71,7 +67,7 @@ useEffect(()=>{
     <h4>About Me:</h4>
     <p>{userInfo.aboutMe}</p>
         </div>
-    <button type="submit" onClick={() =>  navigate(`/updateProfile/${user._id}`)}> Update Information</button> 
+   <button type='submit'><a href={`updateProfile/${user._id}`}>Update Information </a> </button>
         </> 
         )}
         </div>

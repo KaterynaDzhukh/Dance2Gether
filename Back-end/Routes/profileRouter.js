@@ -57,19 +57,6 @@ profileRouter.get("/",  async (req, res)=> {
 }
 })
 
-//Get my Profile
-profileRouter.get("/:id", async(req, res)=> {
-    try {
-    const {id} = req.params
-    const response = await User.findById(id).populate('city_id').populate('dance_id').populate('gender_id')
-    if(!response){
-        res.status(404).json({message: "User does not exist"})
-    }
-    res.status(200).json(response)
-    } catch(err){
-        res.status(500).json(err);
-    }
-});
 
 //Get user Profile
 profileRouter.get("/user/:id", async(req, res)=> {

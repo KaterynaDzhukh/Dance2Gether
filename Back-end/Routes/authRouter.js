@@ -38,16 +38,14 @@ authRouter.get("/", async (req, res)=> {
 }
 })
 
-authRouter.get("/:id", async(req, res)=> {
+authRouter.get("/:id", middlewareAuthorizationFunction, async(req, res)=> {
     try {
-        const id = req.params.id
-      const response = await User.findById(id);
-      res.json(response)
+    const response = await User.findById(req.user.id).populate('city_id').populate('dance_id').populate('gender_id')
+    res.json(response)
     } catch(err){
         res.status(500).json(err);
     }
 });
-
 authRouter.post("/register", async (req, res) => {
     const {userName, email, password} = req.body;
     try {
@@ -79,7 +77,7 @@ authRouter.post("/login", async (req, res) => {
         if(!validPassword){
             return res.status(400).send('Password is incorrect!');
         }
-        const token = generateToken({id: user.id});
+        const token = generateToken({id: user._id});
         res.set('token', token);
         res.set('Access-Control-Expose-Headers', 'token');
         res.json( {token, user} );
@@ -91,17 +89,22 @@ authRouter.post("/login", async (req, res) => {
     }
 })
 
-authRouter.get("/user", middlewareAuthorizationFunction,  async (req, res) => {
-    
+authRouter.get('/user/:id',  async (req, res) => {
     try {
-        const user = await User.findById(req.user.id);
-        if(!user){
-            return res.status(400).send('User not found');
-}
-}catch(err){
+        const response = await User.findById(req.params.id).populate('city_id').populate('dance_id').populate('gender_id')
+        console.log(response, "response")
+
+        if(!response){
+            return res.status(404).json({ message: 'User does not exist' })
+
+        }
+        res.status(200).json(response)
+
+    } catch (err) {
+        console.log(err)
         res.status(500).json(err)
     }
-    
 });
+
 
 export default authRouter;
