@@ -14,7 +14,7 @@ const Navbar = () => {
 
   return (
 
-    
+
       <nav className="bg-red-300 p-4">
   <div className="container mx-auto flex justify-between items-center">
     <div className="space-x-4">
@@ -36,13 +36,8 @@ const Navbar = () => {
   </div>
   </div>
 </nav>
-    
+
   )
-    
-
-
-  
-  
 }
 
 export default Navbar

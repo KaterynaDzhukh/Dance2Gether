@@ -60,8 +60,7 @@ authRouter.post("/register", async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         const response = await User.create({userName, email, password: hashedPassword});
         res.status(201).json(response);
-        //res.redirect('/update/:id')
-
+        
     } catch(err){
         return res.status(500).json(err)
     }
@@ -89,9 +88,9 @@ authRouter.post("/login", async (req, res) => {
     }
 })
 
-authRouter.get('/user/:id',  async (req, res) => {
+authRouter.get('/user',middlewareAuthorizationFunction,  async (req, res) => {
     try {
-        const response = await User.findById(req.params.id).populate('city_id').populate('dance_id').populate('gender_id')
+        const response = await User.findById(req.user.id).populate('city_id').populate('dance_id').populate('gender_id')
         console.log(response, "response")
 
         if(!response){

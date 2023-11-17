@@ -18,16 +18,13 @@ import { useNavigate } from "react-router-dom";
             headers: {'Content-Type': 'application/json'}
             });
             console.log(response.data.user)
-            const { token} = response.data.token;
+            const { token, user} = response.data;
             sessionStorage.setItem('token', token);
             setToken(token) 
             setUser(response.data.user)
             setLoggedIn(true);
             console.log(user)
-            setTimeout(() => {
-
             navigate('/myhomepage');
-            }, 3000);
         }catch(error){
             console.log("Could not fetch data.");
         }finally{
@@ -46,7 +43,7 @@ import { useNavigate } from "react-router-dom";
          const fetchUserData = async () => {
          if (token) {
             try {
-                const response = await axios.get('http://localhost:3000/api/auth/', {
+                const response = await axios.get('http://localhost:3000/api/auth/user', {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json'

@@ -1,7 +1,7 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import  UserContext  from '../context/UserContext';
+
 
 
 
@@ -14,9 +14,10 @@ const Registration=()=> {
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
-    const user = useContext(UserContext)
+ 
 
   const register = async(e) => {
+   console.log('hey')
     e.preventDefault();
     const payload = { userName, email, password };
     setLoading(true);
@@ -27,9 +28,7 @@ const Registration=()=> {
       console.log(response)
       if(response.status === 201 ){
         setSubmitted(true);
-        setTimeout(() => {
-            navigate('/login');
-        }, 3000);
+        navigate('/login');
       }
     }catch(error){
       setError(true);
@@ -43,7 +42,6 @@ const Registration=()=> {
     <>
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-         
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Register
           </h2>
@@ -83,7 +81,7 @@ const Registration=()=> {
             </div>
 
             <div>
-              <button onClick={()=> navigate(`/updateProfile/${user._id}`)} type="submit" className="flex w-full justify-center rounded-md bg-red-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              <button type="submit" className="flex w-full justify-center rounded-md bg-red-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Sign Up
               </button>
