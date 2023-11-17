@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Carousel } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
+import { Link } from 'react-router-dom';
+
 
 const Slider = () => {
   const [slider, setSlider] = useState([]);
@@ -10,7 +13,7 @@ const Slider = () => {
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
-
+  
   useEffect(() => {
     getFetch();
   }, []);
@@ -38,23 +41,29 @@ const Slider = () => {
 
 
   return (
+    <div className="w-[100%] m-auto">
+  {loading ? (
+    <p>Loading...</p>
+  ) : (
+    <Carousel>
+      {slider.map((slide) => (
+        <Carousel.Item key={slide.sliderImage}>
+          <Image src={slide.sliderImage} fluid className="w-full h-auto" />
 
-    <div>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <Carousel>
-          {slider.map((slide) => (
-            <Carousel.Item key={slide.sliderImage}>
-              <Image src={slide.sliderImage} fluid className="d-block"
-                 />
-              <Carousel.Caption>
-                <h3>Dance2Gether</h3> 
-                <p>Dance2Gether</p> 
-              </Carousel.Caption>
-            </Carousel.Item>
-          ))}
-        </Carousel>
+          <Carousel.Caption className="flex flex-col justify-center items-center h-full">
+            <h3 className="text-4xl font-bold text-white">Dance2Gether</h3>
+            <p className="text-lg text-white">
+              Step into the rhythm of connection with Dance2Gether. Find your perfect dance partner and let the music weave the story of your journey on the dance floor. Join now and let the magic of movement begin
+            </p>
+            <Link to="/register">
+            <button className="mt-2 bg-red-500 hover:bg-red-900 text-white py-2 px-4 rounded-full transition-all duration-300 focus:outline-none focus:ring focus:border-blue-300">
+            Register  
+            </button>
+            </Link>
+          </Carousel.Caption>
+        </Carousel.Item>
+      ))}
+    </Carousel>
       )}
     </div>
   )

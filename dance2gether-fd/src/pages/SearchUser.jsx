@@ -82,29 +82,62 @@ const SearchUser = () => {
     }
 
   return(
-    <div>
-            <form onSubmit={findUser}>
-              <label onChange={handleCity}>Choose a city
-              <select  name='cities' id='cities' >
-              <option >--Please choose an option--</option>
-              {cities.length ? 
-              cities.map(city => (
-                <option  value={city._id}  key={city._id}>{city.cityName}</option>
-              ))
-              :null}
-              </select></label>
-          <label onChange={handleDance}>Choose a dancestyle
-            <select  name='dances' id='dances' >
-              <option >--Please choose an option--</option>
-              {dances.length ?
-              dances.map(dance => (
-                <option  value={dance._id} key={dance._id}>{dance.danceName}</option>
-              ))
-              :null}
-            </select></label>
-            <button type='submit'>🔍</button>
-            </form>
-              <div>
+    
+
+
+<>
+    
+<div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+  <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+   
+    <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+      Find your dance partner
+    </h2>
+  </div>
+
+  <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <form onSubmit={findUser} className="space-y-6" action="#" method="POST">
+          <div>   
+                <div className="flex items-center justify-between">
+                    <label onChange={handleCity} htmlFor="city" className="block text-sm font-medium leading-6 text-gray-900">
+                      Choose a city
+                    
+                        <select name='cities' id='cities'>
+                        <option >--Please choose an option--</option>
+                        {cities.length ? 
+                        cities.map(city => (
+                        <option  value={city._id}  key={city._id}>{city.cityName}</option>
+                            ))
+                        :null}
+                        </select></label>
+                    </div>
+                </div>
+
+                <div>   
+                    <div className="flex items-center justify-between">
+                    <label onChange={handleDance} htmlFor="city" className="block text-sm font-medium leading-6 text-gray-900">
+                    Choose a dancestyle
+                    <select  name='dances' id='dances' >
+                    <option className="bg-gray-100 text-gray-900' : 'text-gray-700'" >--Please choose an option--</option>
+                        {dances.length ?
+                        dances.map(dance => (
+                        <option  value={dance._id} key={dance._id}>{dance.danceName}</option>
+                        ))
+                        :null}
+                        </select></label>
+                    </div>
+                </div>
+
+                  <button
+                  type="submit"
+                  className="flex w-full justify-center rounded-md bg-red-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  >
+                  Search 🔍
+                  </button>
+            
+    </form>
+
+            <div>
             {users.length ? 
               users.map((user) => (
                 <div  value={user._id} key={user._id}>                   
@@ -113,7 +146,18 @@ const SearchUser = () => {
               ))
               : null}
               </div>
-    </div>
+
+    
+  </div>
+</div>
+</>
+
+
+
+
+
+
+
   )
 }
 

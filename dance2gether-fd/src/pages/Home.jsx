@@ -4,9 +4,9 @@ import {useEffect, useState} from 'react';
 import Slider from "./Slider.jsx"
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Reviews from '../components/reviews.jsx';
+import Reviews from '../components/Reviews.jsx';
 import { Link } from 'react-router-dom';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
@@ -62,42 +62,61 @@ const HomepageD = () => {
 
 
   return (
-    <div className="container mt-5">
+    <div className="container mx-auto mt-8 px-4">
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <> <Slider />
-        <div>
-        <Link to="/login">
-        <Button variant="danger">Join now</Button>
-        </Link>
-        </div>
-          <p className="lead text-center">
-            “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.”
-          </p>
-          <div className="row row-cols-1 row-cols-md-4 g-4">
-        
+        <>
+          <Slider />
+
+<div>
+
+</div>
+          
+
+<div className="bg-gray-100 rounded-lg">
+  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 text-center">
+    <h2 className="text-3xl font-bold mb-4">Dance to the Beat of Connection!</h2>
+    <p className="text-lg mb-6">Introducing DanceConnect, where passion meets partnership. Unleash the magic of movement as you explore a diverse world of dance styles.</p>
+    <p className="text-lg mb-6">Our advanced matching system ensures you find the perfect partner, tailored to your style, skill, and schedule. Dive into local dance events, workshops, and socials, coordinating meetups with potential partners.</p>
+    <p className="text-lg mb-6">Create a dazzling dance profile, browse through like-minded enthusiasts, and ignite the spark of shared passion. Elevate your dance experience with DanceConnect – where every step leads to a harmonious connection.</p>
+    <p className="text-lg">Join the dance revolution now!</p>
+    <Link to="/register" className="flex justify-center items-center h-full">
+    <button className="mt-2 bg-red-500 hover:bg-red-900 text-white py-2 px-4 rounded-full transition-all duration-300 focus:outline-none focus:ring focus:border-blue-300">
+    Register  
+    </button>
+    </Link>
+  </div>
+</div>
+
+
+
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
             {articles.map((article) => (
-              <Card style={{ width: '18rem' }} key={article.id}>
-                <Card.Img style={{ width: '260px', height: '400px' }} variant="top" src={article.articleImage} />
+              <Card key={article.id} className="shadow-md transition-transform transform hover:scale-105">
+                <Card.Img
+                    className="object-cover w-full h-full"
+                    variant="top"
+                    src={article.articleImage}
+                    alt={article.articleName}
+                  />
+
                 <Card.Body>
-                  <Card.Title>{article.articleName}</Card.Title>
-                  <Card.Text>
-                    {expandedArticles.includes(article.id)
+                  <Card.Title className="text-lg font-bold mb-2">{article.articleName}</Card.Title>
+                  <Card.Text className="text-gray-700 ">
+                    {expandedArticles.includes(article._id)
                       ? article.articleText // Show all text if expanded
                       : `${article.articleText.slice(0, 100)}...`} {/* Show limited text with ellipsis */}
                   </Card.Text>
-                  <Button variant="danger" onClick={() => toggleExpanded(article.id)}>
-                    {expandedArticles.includes(article.id) ? 'Show Less' : 'Show More'}
-                  </Button>
+                  <button onClick={() => toggleExpanded(article._id)} className="mt-2 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-full transition-all duration-300 focus:outline-none focus:ring focus:border-blue-300">
+                  {expandedArticles.includes(article._id) ? 'Show Less' : 'Show More'}
+                  </button>
                 </Card.Body>
               </Card>
             ))}
-            
           </div>
-          <h3 className="lead text-center">
-            “What people say about us...”
-          </h3>
+
           <Reviews />
         </>
       )}
