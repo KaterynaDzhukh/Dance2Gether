@@ -14,7 +14,7 @@ const Navbar = () => {
 
   return (
 
-    
+
       <nav className="bg-red-300 p-4">
   <div className="container mx-auto flex justify-between items-center">
     <div className="space-x-4">
@@ -33,37 +33,11 @@ const Navbar = () => {
           <NavLink to="/about" className="text-black hover:text-gray-800 transition duration-300">AboutUs</NavLink>
         </Fragment>
       )}
-
-    <div>
-        <nav>
-        <div >
-                {user ? (
-                  <>
-                  <NavLink to="/homepagelogin">MyHomePage</NavLink>
-                  <NavLink to="searchUser">SearchUser</NavLink>
-                  <NavLink to="myProfile">MyProfile</NavLink>
-                  <button onClick={logout}>Logout</button>
-                  </>
-                ) : <>
-                    <NavLink to="/home">Home</NavLink>
-                    <NavLink to="/login">Sign in</NavLink>
-                    <NavLink to="/register">Sign up</NavLink>
-                    <NavLink to="/about">AboutUs</NavLink>
-                  </>
-                }
-         </div>
-        </nav>
-
-    </div>
+  </div>
   </div>
 </nav>
-    
-  );
-    
 
-
-  
-  
+  )
 }
 
 export default Navbar

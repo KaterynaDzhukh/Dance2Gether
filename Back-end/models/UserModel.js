@@ -39,7 +39,9 @@ const UserSchema = new mongoose.Schema({
         maxlength: 100,
         trim: true
     },
-    image: ImageSchema
+    image: {
+        type: String
+    }
     ,
     city_id: {  
         type: mongoose.Schema.Types.ObjectId,

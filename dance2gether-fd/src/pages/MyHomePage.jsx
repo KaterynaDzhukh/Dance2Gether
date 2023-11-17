@@ -27,7 +27,7 @@ try { const response =  await axios.get(`http://localhost:3000/api/auth/`,
         {headers: {'Content-Type':'application/json',  'Access-Control-Allow-Origin': '*',  'Authorization': `Bearer ${token}`}})
     if(response.status === 200 ){
      setUsers(response.data)
-     console.log(users.id)
+     console.log(user)
     }
 }catch(error){
     setError(true);

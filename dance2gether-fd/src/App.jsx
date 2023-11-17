@@ -28,7 +28,9 @@ return (
     
 
 <NavBar /> 
-
+</div>
+</div>
+</div>
 <Routes>
 
 <Route path="/myhomepage" element={<MyHomePage/>} />
@@ -46,7 +48,9 @@ return (
 </Routes>
 
 </>
-)}
+)
+
+}
 
 
 export default App;
