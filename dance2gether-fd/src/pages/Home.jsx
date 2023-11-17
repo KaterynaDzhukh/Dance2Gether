@@ -3,7 +3,6 @@ import axios from "axios";
 import {useEffect, useState} from 'react';
 import Slider from "./Slider.jsx"
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import Reviews from '../components/Reviews.jsx';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
