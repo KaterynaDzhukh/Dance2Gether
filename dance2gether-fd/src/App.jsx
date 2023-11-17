@@ -20,9 +20,9 @@ function App() {
 return (
 
       <>
-      <div className="bg-primary w-full overflow-hidden">
+      <div className="bg-red-300 w-full overflow-hidden text-black">
     <div className={`sm:px-16 px-6 flex justify-center items-center`}>
-      <div className={`xl:max-w-[1280px] w-full`}>
+      <div className={`xl:max-w-[1900px] w-full`}>
 <NavBar /> 
 </div>
     </div>

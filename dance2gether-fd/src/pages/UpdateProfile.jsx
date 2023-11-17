@@ -99,53 +99,97 @@ try{
 
 
     return (
-    <div>
-        <h3>Update your Profile Information</h3>
+    
+<>
 
-    <form  onSubmit={updateForm}>
-    <div className="input-container">
-            <label>Upload Profile Image</label>
-            <input type="file"  name="picturePfofile" onChange={(event) => setImage(event.target.files[0])} />
+<div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+         
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          Update your Profile Information
+          </h2>
         </div>
-       <div className="input-container">
-       <p>Enter you city</p>
-            <select>
-            <option value="city">--Please choose an option--</option>
-            {cities.length ? 
-            cities.map((city, index) => (
-            <option value={city._id} key ={index}>{city.cityName}</option>
-            )):null}
-            </select>
+
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form onSubmit={updateForm} className="space-y-6" action="#" method="POST">
+                <div>
+                    <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+                        Upload Profile Image
+                    </label>
+              <     div className="mt-2">
+                    <input input type="file"  name="picturePfofile" onChange={(event) => setImage(event.target.files[0])} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                    </div>
+                </div>
+        
+                <div>   
+                    <div className="flex items-center justify-between">
+                    <label htmlFor="city" className="block text-sm font-medium leading-6 text-gray-900">
+                    Enter you city
+                    </label>
+                        <select>
+                        <option value="city">--Please choose an option--</option>
+                        {cities.length ? 
+                        cities.map((city, index) => (
+                        <option value={city._id} key ={index}>{city.cityName}</option>
+                            )):null}
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <div className="flex items-center justify-between">
+                    <label htmlFor="dance style" className="block text-sm font-medium leading-6 text-gray-900">
+                    Choose your dance styles
+                    </label>
+                        <select>
+                        <option value="danceStyle">--Please choose an option--</option>
+                        {dances.length ? 
+                        dances.map((dance, index) => (
+                        <option value={dance._id} key ={index}>{dance.danceName}</option>
+                        )):null}
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <div className="flex items-center justify-between">
+                    <label htmlFor="about me" className="block text-sm font-medium leading-6 text-gray-900">
+                    About me
+                    </label>
+                    <textarea name='aboutMe' />
+                    </div>
+                </div>
+
+                <div>
+                    <div className="flex items-center justify-between">
+                    <label htmlFor="dance style" className="block text-sm font-medium leading-6 text-gray-900">
+                    You are:
+                    </label>
+                        <select>
+                        <option value="gender">--Please choose an option--</option>
+                        {genders.length ? 
+                        genders.map((gender, index) => (
+            <           option value={gender._id} key ={index}> {gender.gender} </option>
+                            )):null}
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <button
+                    type="submit"
+                    className="flex w-full justify-center rounded-md bg-red-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    >
+                    Submit
+                    </button>
+                </div>
+        
+        </form>
         </div>
-        <div className="input-container">
-        <p>Choose your dance styles </p>
-            <select>
-            <option value="danceStyle">--Please choose an option--</option>
-            {dances.length ? 
-            dances.map((dance, index) => (
-            <option value={dance._id} key ={index}>{dance.danceName}</option>
-            )):null}
-            </select>
-        </div>
-        <div className="input-container">
-        <label>About Me </label> 
-        <textarea name='aboutMe' />
-        </div>
-          <div className="input-container">
-            <p>You are:</p>
-            <select>
-            <option value="gender">--Please choose an option--</option>
-            {genders.length ? 
-            genders.map((gender, index) => (
-            <option value={gender._id} key ={index}> {gender.gender} </option>
-            )):null}
-            </select>
-          </div>
-          <div className="button-container">
-            <button type="submit">Save</button> 
-          </div>
-       </form>
-       </div>
+      </div>
+</>
+
+
      )
    }
    
