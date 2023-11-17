@@ -23,6 +23,7 @@ import { useNavigate } from "react-router-dom";
             setToken(token) 
             setUser(response.data.user)
             setLoggedIn(true);
+            console.log(user)
             setTimeout(() => {
 
             navigate('/myhomepage');
@@ -51,7 +52,7 @@ import { useNavigate } from "react-router-dom";
                         'Content-Type': 'application/json'
                     }
                 });
-                console.log(response)
+                // console.log(response)
                 setUser(response.data);
             } catch (err) {
                 console.log('Failed to fetch user data:', err);

@@ -10,6 +10,7 @@ const MyHomePage = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [activeUser, setActiveUser] = useState({})
+  const [error, setError] = useState(false)
   const navigate = useNavigate();
 
 
@@ -24,7 +25,7 @@ const MyHomePage = () => {
           setLoading(true);
 try { const response =  await axios.get(`http://localhost:3000/api/auth/`, 
         {headers: {'Content-Type':'application/json',  'Access-Control-Allow-Origin': '*',  'Authorization': `Bearer ${token}`}})
-    if(response.status === 200 && response.id !== activeUser.id){
+    if(response.status === 200 ){
      setUsers(response.data)
      console.log(users.id)
     }
@@ -39,7 +40,6 @@ try { const response =  await axios.get(`http://localhost:3000/api/auth/`,
   return (
     <div >
       <h2>Welcome back, {activeUser.userName}</h2>
-    
         <div >
         {users.map((user, index) => (
     <Card key={index} style={{ width: '18rem' }}>

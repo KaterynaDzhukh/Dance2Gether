@@ -11,8 +11,8 @@ const Navbar = () => {
   return (
     <div>
         <nav>
-        <div style={{display: 'flex', justifyContent: 'flex-end', gap: '3em'}}>
-                {token ? (
+        <div >
+                {user ? (
                   <>
                   <NavLink to="/homepagelogin">MyHomePage</NavLink>
                   <NavLink to="searchUser">SearchUser</NavLink>
