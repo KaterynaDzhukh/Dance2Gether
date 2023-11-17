@@ -39,8 +39,9 @@ const UserSchema = new mongoose.Schema({
         maxlength: 100,
         trim: true
     },
-    image: ImageSchema
-    ,
+
+    image: ImageSchema, 
+    
     city_id: {  
         type: mongoose.Schema.Types.ObjectId,
         ref: 'City'
@@ -54,4 +55,3 @@ const UserSchema = new mongoose.Schema({
 const User = mongoose.model("User", UserSchema)
 
 export default User;
-

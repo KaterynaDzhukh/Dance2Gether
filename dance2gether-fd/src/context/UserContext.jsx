@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
             console.log(response.data.user)
             const { token} = response.data;
             sessionStorage.setItem('token', token);
-            setToken(token) 
+            setToken(response.data.token) 
             setUser(response.data.user)
             setLoggedIn(true);
             setTimeout(() => {

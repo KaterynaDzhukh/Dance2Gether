@@ -1,12 +1,12 @@
 import React,{useEffect, useState, useContext} from 'react'
 import axios from 'axios'
-import {UserContext} from "../context/UserContext.jsx";
-import { useNavigate } from 'react-router-dom'
+import {UserContext} from "../context/UserContext.jsx"
+
+
 
 
 const MyProfile=() =>{
     const {user, token} = useContext(UserContext);
-    const navigate = useNavigate();
     const [userInfo, setUserInfo] = useState([]);
     const [loading, setLoading]=useState(false);
     const [error, setError] = useState(false);
@@ -67,7 +67,7 @@ useEffect(()=>{
     <h4>About Me:</h4>
     <p>{userInfo.aboutMe}</p>
         </div>
-   <button type='submit'><a href={`updateProfile/${user._id}`}>Update Information </a> </button>
+        <button type="submit"> <a href={'/updateProfile'}>Update Information</a> </button>
         </> 
         )}
         </div>

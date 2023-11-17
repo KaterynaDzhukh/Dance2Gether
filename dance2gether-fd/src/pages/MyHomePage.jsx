@@ -22,7 +22,6 @@ const navigate = useNavigate();
     // console.log('hey')
     try {
       setLoading(true);
-     
       let config = {
         url: "http://localhost:3000/api/auth/",
         method: "get",

@@ -17,24 +17,28 @@ if(!aboutMe|| !image  || !dance_id ||!city_id || !gender_id){
 
 
 //Update information after registration
-const storage = multer.memoryStorage(
-    {filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now();
-    cb(null, uniqueSuffix +  file.originalname)
-}})
-
-const upload = multer({storage: storage})
+const storage = multer.memoryStorage;
+const upload = multer({storage: storage});
 
 profileRouter.put("/update/:id", middlewareUpdateFunction, upload.single('image'), async (req, res, next) => {
-    const newImage = new Image({
-        filename: req.file.originalname,
-        contentType: req.file.mimetype,
-        imageBase64: req.file.buffer.toString('base64'),
-});
-    const id = req.params.id
-    const {aboutMe, image,  dance_id, city_id, gender_id} = req.body;
+
     try {
-        const response = await User.findByIdAndUpdate(id,{aboutMe, image, dance_id, city_id, gender_id}, {image: newImage},
+        const id = req.params.id
+        const {aboutMe, image,  dance_id, city_id, gender_id} = req.body;
+
+        const newUser = new User({
+            aboutMe,
+            dance_id,
+            city_id,
+            gender_id,
+            image: {
+                filename: req.file.originalname,
+                contentType: req.file.mimetype,
+                imageBase64: req.file.buffer.toString('base64'),
+              }
+        });
+
+        const response = await newUser.findByIdAndUpdate(id,{aboutMe, image, dance_id, city_id, gender_id},
         {new: true}).populate('city_id').populate('dance_id').populate('gender_id')
         if(!response){
             res.status(404).json({message: "Please add all information"})

@@ -1,17 +1,16 @@
-import React, { useEffect, useState} from "react";
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState, useContext} from "react";
+import {UserContext} from "../context/UserContext.jsx"
 import axios from "axios";
 
 
 
 const UpdateProfile=()=> {
-    const { id } = useParams();
-    const navigate = useNavigate();
+    const {user, token} = useContext(UserContext);
+    console.log(user)
     const [aboutMe, setAboutMe] = useState()
     const [city_id, setCity_Id] = useState('')
     const [gender_id, setGender_Id] = useState('')
     const [dance_id, setDance_Id] = useState('')
-    const [image, setImage] = useState([]);
     const [cities, setCities] = useState([]);
     const [dances, setDances] = useState([]);
     const [genders, setGenders] = useState([]);
@@ -25,7 +24,7 @@ const getCities = async() =>{
     setLoading(true);
     try{
         const response =  await axios.get("http://localhost:3000/api/cities", 
-        {headers: {'Content-Type':'application/json', 'Access-Control-Allow-Origin': '*' }})
+        {headers: {'Content-Type':'application/json', 'Access-Control-Allow-Origin': '*', 'Authorization': `Bearer ${token}` }})
         console.log(response.data)
         setCities(response.data)
     }catch(error){
@@ -69,9 +68,6 @@ useEffect(()=>{
     getGenders([])
 }, [])
 
-console.log(image)
-console.log(city_id.cityName)
-console.log(aboutMe)
 
 
 
@@ -79,16 +75,21 @@ const updateForm =async(e)=>{
     console.log('hey')
     e.preventDefault();
     setLoading(true);
+    if (!file) return;
 const formData = new FormData();
-    formData.append('image', image);
+    formData.append('image', file);
     formData.append('aboutMe', aboutMe);
     formData.append('city_id', city_id);
     formData.append('gender_id', gender_id);
     formData.append('dance_id', dance_id);
 try{
-        const response = await axios.put(`http://localhost:3000/api/profile/update/${id}`, formData, {
-        headers: {'Accept': 'application/json', "Content-Type": "multipart/form-data"  }});
+        const response = await axios.put(`http://localhost:3000/api/auth/update/${user._id}`, formData, {
+        headers: {'Authorization': `Bearer ${token}`, "Content-Type": "multipart/form-data"  }});
         console.log(response.data)
+        setAboutMe([...aboutMe, response.data]);
+        setCity_Id([...city_id, response.data]);
+        setGender_Id([...gender_id, response.data]);
+        setDance_Id([...dance_id, response.data]);
 
 }catch(error){
         console.log("Could not fetch data.");
@@ -97,7 +98,6 @@ try{
 } 
 }
 
-
     return (
     <div>
         <h3>Update your Profile Information</h3>
@@ -105,7 +105,7 @@ try{
     <form  onSubmit={updateForm}>
     <div className="input-container">
             <label>Upload Profile Image</label>
-            <input type="file"  name="picturePfofile" onChange={(event) => setImage(event.target.files[0])} />
+            <input type="file"  name="picturePfofile" onChange={(event) => setFile(event.target.files[0])} />
         </div>
        <div className="input-container">
        <p>Enter you city</p>

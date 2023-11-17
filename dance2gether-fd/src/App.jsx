@@ -26,7 +26,7 @@ return (
 <Route path="/myhomepage" element={<MyHomePage/>} />
 <Route path="/messenger" element= { <Messenger />}/>
 <Route path="/searchUser" element={<SearchUser/>} />
-<Route path="/updateProfile/:id" element={<UpdateProfile/>} />
+<Route path="/updateProfile" element={<UpdateProfile/>} />
 <Route path="/myProfile" element={<MyProfile/>} />
 <Route path="/home" element={<Home/>} />
 <Route path="/about" element={<AboutUs/>} /> 
