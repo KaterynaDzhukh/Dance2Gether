@@ -9,10 +9,11 @@ import { Fragment } from 'react';
 const Navbar = () => {
   const {user, token, logout} = useContext(UserContext);
 
-  console.log(user, 'user', token, 'token')
+  // console.log(user, 'user', token, 'token')
 
 
   return (
+
     
       <nav className="bg-red-300 p-4">
   <div className="container mx-auto flex justify-between items-center">
@@ -32,6 +33,27 @@ const Navbar = () => {
           <NavLink to="/about" className="text-black hover:text-gray-800 transition duration-300">AboutUs</NavLink>
         </Fragment>
       )}
+
+    <div>
+        <nav>
+        <div >
+                {user ? (
+                  <>
+                  <NavLink to="/homepagelogin">MyHomePage</NavLink>
+                  <NavLink to="searchUser">SearchUser</NavLink>
+                  <NavLink to="myProfile">MyProfile</NavLink>
+                  <button onClick={logout}>Logout</button>
+                  </>
+                ) : <>
+                    <NavLink to="/home">Home</NavLink>
+                    <NavLink to="/login">Sign in</NavLink>
+                    <NavLink to="/register">Sign up</NavLink>
+                    <NavLink to="/about">AboutUs</NavLink>
+                  </>
+                }
+         </div>
+        </nav>
+
     </div>
   </div>
 </nav>

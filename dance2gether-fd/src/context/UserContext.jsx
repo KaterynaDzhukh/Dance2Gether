@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
  const UserProvider = ({children}) => {
     const navigate = useNavigate();
     const [token, setToken] = useState(sessionStorage.getItem('token') || null);
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState({});
 
     const login = async(email, password, setLoading, setLoggedIn ) => {
         const payload = { email, password };
@@ -18,11 +18,12 @@ import { useNavigate } from "react-router-dom";
             headers: {'Content-Type': 'application/json'}
             });
             console.log(response.data.user)
-            const { token} = response.data;
+            const { token} = response.data.token;
             sessionStorage.setItem('token', token);
             setToken(token) 
             setUser(response.data.user)
             setLoggedIn(true);
+            console.log(user)
             setTimeout(() => {
 
             navigate('/myhomepage');
@@ -51,7 +52,7 @@ import { useNavigate } from "react-router-dom";
                         'Content-Type': 'application/json'
                     }
                 });
-                console.log(response.data)
+                // console.log(response)
                 setUser(response.data);
             } catch (err) {
                 console.log('Failed to fetch user data:', err);
