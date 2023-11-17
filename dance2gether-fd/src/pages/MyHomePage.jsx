@@ -7,46 +7,40 @@ import {UserContext} from "../context/UserContext.jsx";
 
 const MyHomePage = () => {
   const {user, token} = useContext(UserContext);
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [activeUser, setActiveUser] = useState({})
+  const navigate = useNavigate();
 
-const [users, setUsers] = useState([]);
-const [loading, setLoading] = useState(false);
-
-const navigate = useNavigate();
 
   useEffect(() => {
-    getFetch();
+    getFetch()  
+    setActiveUser(user)
+  // console.log(activeUser)
   }, []);
 
 
   const getFetch = async () => {
-    // console.log('hey')
-    try {
-      setLoading(true);
-     
-      let config = {
-        url: "http://localhost:3000/api/auth/",
-        method: "get",
-        headers: { 
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-      };
-      const response = await axios(config);
-      setUsers(response.data);
-      console.log(response.data);
-    } catch (error) {
-      console.log("Error fetching data:", error);
-    } finally {
-      setLoading(false);
+          setLoading(true);
+try { const response =  await axios.get(`http://localhost:3000/api/auth/`, 
+        {headers: {'Content-Type':'application/json',  'Access-Control-Allow-Origin': '*',  'Authorization': `Bearer ${token}`}})
+    if(response.status === 200 && response.id !== activeUser.id){
+     setUsers(response.data)
+     console.log(users.id)
     }
-  };
+}catch(error){
+    setError(true);
+    console.log("Could not fetch data.");
+}finally{
+    setLoading(false)
+} 
+}
+     
   return (
-    <div className="container mt-5">
-    {loading ? (
-      <p>Loading...</p>
-    ) : (
-      <>
-        <div className="row row-cols-1 row-cols-md-4 g-4">
+    <div >
+      <h2>Welcome back, {activeUser.userName}</h2>
+    
+        <div >
         {users.map((user, index) => (
     <Card key={index} style={{ width: '18rem' }}>
       <Card.Img variant="top" src={user.image}  />
@@ -55,13 +49,11 @@ const navigate = useNavigate();
         <Card.Text>
         {user.aboutMe}
         </Card.Text>
-        <button type="submit" onClick={() => navigate(`/userProfile/${user._id}`)}>Go to Profile!</button> 
+        {/* <button type="submit" onClick={() => navigate(`/userProfile/${user._id}`)}>Go to Profile!</button>  */}
       </Card.Body>
     </Card>
    ))}
    </div>
-    </>
-  )};
     </div>    
     );
 }
