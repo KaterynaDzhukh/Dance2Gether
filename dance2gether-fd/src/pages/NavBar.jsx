@@ -5,7 +5,7 @@ import { useContext } from 'react';
 const Navbar = () => {
   const {user, token, logout} = useContext(UserContext);
 
-  console.log(user, 'user', token, 'token')
+  // console.log(user, 'user', token, 'token')
 
 
   return (
