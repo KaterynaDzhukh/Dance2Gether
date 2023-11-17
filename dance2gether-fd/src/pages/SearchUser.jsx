@@ -104,17 +104,15 @@ const SearchUser = () => {
             </select></label>
             <button type='submit'>🔍</button>
             </form>
-            <div>
-              <ul>
+              <div>
             {users.length ? 
               users.map((user) => (
-                <li value={user._id} key={user._id}>                   
-                    <a href={`userProfile/${user._id}`}>{user.userName} </a>
-                </li>
+                <div  value={user._id} key={user._id}>                   
+                    <a  href={`userProfile/${user._id}`}>{user.userName} </a>
+                </div>
               ))
               : null}
-              </ul>
-      </div>
+              </div>
     </div>
   )
 }
