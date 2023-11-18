@@ -7,8 +7,8 @@ const SearchUser = () => {
           const [dances, setDances] = useState([]);
           const [error, setError] = useState(false);
         const [users, setUsers] = useState([]);
-        const [citiesSearch, setCitiesSearch] = useState("");
-        const [dancesSearch, setDancesSearch] = useState("");
+        const [city, setCity] = useState("");
+        const [dance, setDance] = useState("")
 
     useEffect(()=> {
           getCities([]);
@@ -51,14 +51,12 @@ const SearchUser = () => {
 
     const handleCity = (e) => {
       e.preventDefault();
-      setCitiesSearch(e.target.value);
-      console.log(citiesSearch)
+      setCity(e.target.value);
     }
 
     const handleDance = (e) => {
       e.preventDefault();
-      setDancesSearch(e.target.value);
-      console.log(dancesSearch)
+      setDance(e.target.value);
     }
 
 
@@ -66,7 +64,7 @@ const SearchUser = () => {
         e.preventDefault();
         setLoading(true);
         try{
-            const response = await axios.get(`http://localhost:3000/api/search/${citiesSearch}/${dancesSearch}`);
+            const response = await axios.get(`http://localhost:3000/api/search/${city}/${dance}`);
             if(response.status === 200 ){
           setUsers(response.data)
             } {
@@ -128,7 +126,7 @@ const SearchUser = () => {
                     </div>
                 </div>
 
-                  <button
+                  <button 
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-red-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
