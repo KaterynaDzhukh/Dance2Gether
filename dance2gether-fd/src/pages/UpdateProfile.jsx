@@ -1,12 +1,14 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState, useContext} from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from "axios";
+import {UserContext} from "../context/UserContext.jsx";
 
 
 
 const UpdateProfile=()=> {
-    const { id } = useParams();
+   //const { id } = useParams();
     const navigate = useNavigate();
+    const {user, token} = useContext(UserContext);
     const [aboutMe, setAboutMe] = useState('')
     const [city_id, setCity_Id] = useState('')
     const [gender_id, setGender_Id] = useState('')
@@ -24,7 +26,7 @@ const getCities = async() =>{
     setLoading(true);
     try{
         const response =  await axios.get("http://localhost:3000/api/cities", 
-        {headers: {'Content-Type':'application/json', 'Access-Control-Allow-Origin': '*', 'Authorization': `Bearer ${token}`}})
+        {headers: {'Content-Type':'application/json', 'Access-Control-Allow-Origin': '*'}})
         console.log(response.data)
         setCities(response.data)
     }catch(error){
@@ -69,14 +71,14 @@ useEffect(()=>{
 }, [])
 
 
-const updateForm =async(e)=>{
+const updateForm = async(e)=>{
     console.log('hey')
     e.preventDefault();
     const payload = {aboutMe, dance_id, city_id, gender_id};
     setLoading(true);
 try{
-        const response = await axios.put(`http://localhost:3000/api/profile/update/${id}`, payload, {
-        headers: {'Accept': 'application/json', 'Access-Control-Allow-Origin': '*' }});
+        const response = await axios.put(`http://localhost:3000/api/profile/update/${user._id}`, payload, {
+        headers: {'Accept': 'application/json', 'Access-Control-Allow-Origin': '*', 'Authorization': `Bearer ${token}`}});
         if(response.status === 201 ){
         setSubmitted(true);
         console.log(response.data)
@@ -127,7 +129,6 @@ const handleCity = (e) => {
                     <div className="flex items-center justify-between">
                     <label onChange={handleCity} htmlFor="city" className="block text-sm font-medium leading-6 text-gray-900">
                     Enter you city
-                    </label>
                         <select>
                         <option value="city">--Please choose an option--</option>
                         {cities.length ? 
@@ -135,6 +136,7 @@ const handleCity = (e) => {
                         <option value={city._id} key ={index}>{city.cityName}</option>
                             )):null}
                         </select>
+                        </label>
                     </div>
                 </div>
 
@@ -142,7 +144,6 @@ const handleCity = (e) => {
                     <div className="flex items-center justify-between">
                     <label onChange={handleDance}htmlFor="dance style" className="block text-sm font-medium leading-6 text-gray-900">
                     Choose your dance styles
-                    </label>
                         <select>
                         <option value="danceStyle">--Please choose an option--</option>
                         {dances.length ? 
@@ -150,6 +151,7 @@ const handleCity = (e) => {
                         <option value={dance._id} key ={index}>{dance.danceName}</option>
                         )):null}
                         </select>
+                        </label>
                     </div>
                 </div>
 
@@ -157,8 +159,8 @@ const handleCity = (e) => {
                     <div className="flex items-center justify-between">
                     <label onChange={handleAboutMe} htmlFor="about me" className="block text-sm font-medium leading-6 text-gray-900">
                     About me
-                    </label>
                     <textarea name='aboutMe' />
+                    </label>
                     </div>
                 </div>
 
@@ -166,7 +168,6 @@ const handleCity = (e) => {
                     <div className="flex items-center justify-between">
                     <label onChange={handleGender}htmlFor="dance style" className="block text-sm font-medium leading-6 text-gray-900">
                     You are:
-                    </label>
                         <select>
                         <option value="gender">--Please choose an option--</option>
                         {genders.length ? 
@@ -174,6 +175,7 @@ const handleCity = (e) => {
             <           option value={gender._id} key ={index}> {gender.gender} </option>
                             )):null}
                         </select>
+                        </label>
 
                     </div>
                 </div>
