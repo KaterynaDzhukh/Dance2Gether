@@ -71,7 +71,7 @@ return (
         </div>
         <div>
             <br></br>
-        <h4 className="text-2xl tracking-tight text-gray-900 sm:text-2xl">
+        <h4 className="text-2xl tracking-tight text-gray-900 sm:text-2xl ">
             About Me:
             </h4>
             <p className="mt-4 text-xl text-gray-500">
