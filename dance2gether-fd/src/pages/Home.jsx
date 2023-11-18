@@ -76,9 +76,9 @@ const HomepageD = () => {
 <div className="bg-gray-100 rounded-lg">
   <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 text-center">
     <h2 className="text-3xl font-bold mb-4">Dance to the Beat of Connection!</h2>
-    <p className="text-lg mb-6">Introducing DanceConnect, where passion meets partnership. Unleash the magic of movement as you explore a diverse world of dance styles.</p>
+    <p className="text-lg mb-6">Introducing Dance2Gether, where passion meets partnership. Unleash the magic of movement as you explore a diverse world of dance styles.</p>
     <p className="text-lg mb-6">Our advanced matching system ensures you find the perfect partner, tailored to your style, skill, and schedule. Dive into local dance events, workshops, and socials, coordinating meetups with potential partners.</p>
-    <p className="text-lg mb-6">Create a dazzling dance profile, browse through like-minded enthusiasts, and ignite the spark of shared passion. Elevate your dance experience with DanceConnect – where every step leads to a harmonious connection.</p>
+    <p className="text-lg mb-6">Create a dazzling dance profile, browse through like-minded enthusiasts, and ignite the spark of shared passion. Elevate your dance experience with Dance2Gether – where every step leads to a harmonious connection.</p>
     <p className="text-lg">Join the dance revolution now!</p>
     <Link to="/register" className="flex justify-center items-center h-full">
     <button className="mt-2 bg-red-500 hover:bg-red-900 text-white py-2 px-4 rounded-full transition-all duration-300 focus:outline-none focus:ring focus:border-blue-300">
