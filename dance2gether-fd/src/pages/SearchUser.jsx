@@ -134,17 +134,29 @@ const SearchUser = () => {
                   </button>
             
     </form>
-
-            <div>
+    <div className="flex justify-center">
+      <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0"></div>
             {users.length ? 
               users.map((user) => (
                 <div  value={user._id} key={user._id}>                   
                     <a  href={`userProfile/${user._id}`}>{user.userName} </a>
+                    <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64 ">
+        {user.image ? 
+              (<img
+                           src ={user.image} 
+                          alt=""
+                           width='55%' className="rounded-lg bg-gray-100 flex items-center"/> )
+                          : ( 
+                            <img
+                            src="../public/images/NoPicAvatar.jpg" 
+                          alt=""
+                           width='55%' className="rounded-lg bg-gray-100 flex items-center"/>)
+                        } 
+      </div>
                 </div>
               ))
               : null}
               </div>
-
     
   </div>
 </div>
