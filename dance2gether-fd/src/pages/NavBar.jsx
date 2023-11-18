@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { UserContext } from '../context/UserContext';
+import { UserContext } from '../context/UserContext.jsx';
 import { useContext } from 'react';
 import { Fragment } from 'react';
 
