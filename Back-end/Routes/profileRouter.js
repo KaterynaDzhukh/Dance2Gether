@@ -8,9 +8,9 @@ const profileRouter = express.Router();
 
 profileRouter.put("/update/:id",  async (req, res) => {
     const id = req.params.id
-    const {aboutMe, image,  dance_id, city_id, gender_id} = req.body;
+    const {aboutMe, dance_id, city_id, gender_id} = req.body;
     try {
-        const response = await User.findByIdAndUpdate(id,{aboutMe, image, dance_id, city_id, gender_id},
+        const response = await User.findByIdAndUpdate(id,{userName, aboutMe, dance_id, city_id, gender_id},
         {new: true}).populate('city_id').populate('dance_id').populate('gender_id')
         if(!response){
             res.status(404).json({message: "Please add all information"})

@@ -13,6 +13,7 @@ const MyHomePage = () => {
   const navigate = useNavigate();
 
 
+
   useEffect(() => {
     getFetch()  
   }, []);
@@ -36,16 +37,15 @@ try { const response =  await axios.get(`http://localhost:3000/api/auth/`,
     setLoading(false)
 } 
 }
-     
   return (
     <div className='bg-white py-24 sm:py-32' >
       <p className=" mb-3 text-3xl font-bold tracking-tight text-gray-700 sm:text-5xl flex justify-center">
-      Find Dance Partner
+      Find A Dance Partner, {user.userName}
           </p>
           <div className="h-px bg-gray-300" />
           <p className="mt-5 text-lg leading-6 text-gray-600 flex justify-center mb-10 ">
           Match with other dancers based on your dance genres.
-           Find the partners you always wanted and friends that you want to dance with
+          Find the partners you always wanted and friends that you want to dance with
           </p>
   
       <div className="flex justify-center">
@@ -53,7 +53,7 @@ try { const response =  await axios.get(`http://localhost:3000/api/auth/`,
         {users.map((user, index) => (
       <a  key={index }href={`userProfile/${user._id}`} className='max-w-sm p-6  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
         <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64 ">
-        <img src={user.image} width='35%' className="rounded-lg bg-gray-100" /> 
+        <img src={user.image} width='55%' className="rounded-lg bg-gray-100 flex items-center" /> 
       </div>
       <div className="text-m leading-6">
       <h3 className="text-xl text-black-bold-900 ">{user.userName}</h3>
@@ -61,14 +61,12 @@ try { const response =  await axios.get(`http://localhost:3000/api/auth/`,
       </div>
       </a>
   
-   ))}
-   </div>
-   </div> 
+))}
+</div>
+</div> 
     </div> 
-     
     );
 }
-
 
 
 export default MyHomePage;
