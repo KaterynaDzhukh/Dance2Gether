@@ -8,10 +8,6 @@ const UserProfile=() =>{
     const [userInfo, setUserInfo] = useState([]);
     const [loading, setLoading]=useState(false);
     const [error, setError] = useState(false);
-    const [city, setCity] = useState([]);
-    const [genders, setGenders] = useState([]);
-    const [dances, setDances] = useState([]);
-    const [email, setEmail] = useState([])
 
     const getUserProfile =async()=>{
     try{
@@ -20,10 +16,6 @@ const UserProfile=() =>{
         console.log(response.data)
     if(response.status === 200){
         setUserInfo(response.data)
-        setCity(response.data.city_id)
-        setDances(response.data.dance_id)
-        setGenders(response.data.gender_id)
-        setEmail(response.data.email)
     }
 }catch(error){
     setError(true);
@@ -45,21 +37,21 @@ useEffect(()=>{
       <div className="pb-80 pt-16 sm:pb-40 sm:pt-24 lg:pb-48 lg:pt-40">
         <div className="relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
           <div className="sm:max-w-lg">
-            <h1 className="text-sm font-bold tracking-tight text-gray-900 sm:text-4xl">
+            <h1 className="text-sm font-bold tracking-tight text-gray-900 sm:text-4xl mb-4">
             Hello, I am {userInfo.userName}, let's dance!
             </h1>
             <br></br>
             <h4 className="text-sm tracking-tight text-gray-900 sm:text-2xl">
-            City: {city.cityName}
+            City:
             </h4>
-            <p className="mt-4 text-xl text-gray-500">
-           
+            <p className="mt-2 text-xl text-gray-500">
+            {userInfo.city_id ? userInfo.city_id.cityName : null}
             </p>
             <h4 className="text-2xl tracking-tight text-gray-900 sm:text-2xl">
-            Gender: {genders.gender}
+            Gender:
             </h4>
-            <p className="mt-4 text-xl text-gray-500">
-            
+            <p className="mt-2 text-xl text-gray-500">
+            {userInfo.gender_id ? userInfo.gender_id.gender: null}
             </p>
             <h4 className=" tracking-tight text-gray-900 sm:text-2xl">
             Dance Style: 
@@ -67,7 +59,7 @@ useEffect(()=>{
             {dances.length ? 
             dances.map((dance, index) => (
                 <div key = {index}>
-            <p className="mt-3 text-xl text-gray-500">
+            <p className="mt-2 text-xl text-gray-500">
             {dance.danceName}
             </p>
             </div>
@@ -78,10 +70,10 @@ useEffect(()=>{
         <h4 className="text-2xl tracking-tight text-gray-900 sm:text-2xl">
             About Me:
             </h4>
-            <p className="mt-4 text-xl text-gray-500">
-            {userInfo.aboutMe}
+            <p className="mt-2 text-xl text-gray-500">
+            {userInfo.aboutMe ? userInfo.aboutMe : null}
             </p>
-            <button type='submit' className="mt-4 bg-red-400 hover:bg-red-900 text-white font-bold py-2 px-4 rounded"><a target='_blank' href = {`mailto:${email}`}>Send Message</a> </button>
+            <button type='submit' className="mt-4 bg-red-400 hover:bg-red-900 text-white font-bold py-2 px-4 rounded"><a target='_blank' href = {`mailto:${userInfo.email}`}>Send Message</a> </button>
         </div>
 
         <div>
@@ -93,7 +85,7 @@ useEffect(()=>{
                     <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                       <div className="h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100">
                         <img
-                           src ={`${userInfo.image}`} width='30%' 
+                           src ={userInfo.image ? userInfo.image : null} width='30%' 
                           alt=""
                           className="h-full w-full object-cover object-center"/>
                       </div>
