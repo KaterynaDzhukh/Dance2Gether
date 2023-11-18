@@ -60,7 +60,7 @@ return (
             <h4 className="text-2xl tracking-tight text-gray-900 sm:text-2xl">
             Dance Style:
             </h4>
-            {userInfo.dance_id.length ? 
+            {userInfo.dance_id ? 
             userInfo.dance_id.map((dance, index) => (
                 <div key ={index}>
             <p className="mt-2 text-xl text-gray-500">

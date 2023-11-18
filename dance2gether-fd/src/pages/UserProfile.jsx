@@ -5,7 +5,7 @@ import {  useParams } from 'react-router-dom';
 
 const UserProfile=() =>{
     const { id } = useParams();
-    const [userInfo, setUserInfo] = useState([]);
+    const [userInfo, setUserInfo] = useState({});
     const [loading, setLoading]=useState(false);
     const [error, setError] = useState(false);
 
@@ -56,8 +56,8 @@ useEffect(()=>{
             <h4 className=" tracking-tight text-gray-900 sm:text-2xl">
             Dance Style: 
             </h4>
-            {dances.length ? 
-            dances.map((dance, index) => (
+            {userInfo.dance_id ? 
+            userInfo.dance_id.map((dance, index) => (
                 <div key = {index}>
             <p className="mt-2 text-xl text-gray-500">
             {dance.danceName}
