@@ -42,7 +42,7 @@ useEffect(()=>{
         <p>Loading...</p>) : (
     <>
     <div>
-    <img src ={`${userInfo.profilePicture}`} width='30%' />
+    <img src ={`${userInfo.image}`} width='30%' />
     </div>
     <h2>{userInfo.userName}</h2>
     <div>

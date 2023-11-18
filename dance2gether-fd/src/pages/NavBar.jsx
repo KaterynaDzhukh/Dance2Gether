@@ -6,6 +6,7 @@ import { Fragment } from 'react';
 
 
 
+
 const Navbar = () => {
   const {user, token, logout} = useContext(UserContext);
 
@@ -21,9 +22,10 @@ const Navbar = () => {
       {token ? (
         <Fragment>
           <NavLink to="/homepagelogin" className="text-black mr-4 hover:text-gray-800 transition duration-300">MyHomePage</NavLink>
-          <NavLink to="searchUser" className="text-black mr-4 hover:text-gray-800 transition duration-300">SearchUser</NavLink>
-          <NavLink to="myProfile" className="text-black mr-4 hover:text-gray-800 transition duration-300">MyProfile</NavLink>
+          <NavLink to="/searchUser" className="text-black mr-4 hover:text-gray-800 transition duration-300">SearchUser</NavLink>
+          <NavLink to="/myProfile" className="text-black mr-4 hover:text-gray-800 transition duration-300">MyProfile</NavLink>
           <button onClick={logout} className="text-black hover:text-gray-800 transition duration-300">Logout</button>
+          <h2 className="inline-flex items-start">Welcome {user.userName}</h2>
         </Fragment>
       ) : (
         <Fragment>
