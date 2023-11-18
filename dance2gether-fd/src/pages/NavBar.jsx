@@ -24,7 +24,6 @@ const Navbar = () => {
           <NavLink to="/searchUser" className="text-black mr-4 hover:text-gray-800 transition duration-300">SearchUser</NavLink>
           <NavLink to="/myProfile" className="text-black mr-4 hover:text-gray-800 transition duration-300">MyProfile</NavLink>
           <button onClick={logout} className="text-black hover:text-gray-800 transition duration-300">Logout</button>
-          
         </Fragment>
       ) : (
         <Fragment>

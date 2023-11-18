@@ -6,6 +6,7 @@ import axios from 'axios';
 
 
 
+
 const Registration=()=> {
     const navigate = useNavigate();
     const [userName, setUserName] = useState('');
@@ -22,7 +23,7 @@ const Registration=()=> {
     setLoading(true);
     try {
       const response = await axios.post('http://localhost:3000/api/auth/register', payload, {
-        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', }
       });
       console.log(response)
       if(response.status === 201 ){

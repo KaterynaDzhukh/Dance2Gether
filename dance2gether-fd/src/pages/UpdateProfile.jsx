@@ -1,31 +1,32 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState, useContext} from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from "axios";
+import {UserContext} from "../context/UserContext.jsx";
 
 
 
 const UpdateProfile=()=> {
-    const { id } = useParams();
+   //const { id } = useParams();
     const navigate = useNavigate();
-    const [aboutMe, setAboutMe] = useState()
+    const {user, token} = useContext(UserContext);
+    const [aboutMe, setAboutMe] = useState('')
     const [city_id, setCity_Id] = useState('')
     const [gender_id, setGender_Id] = useState('')
     const [dance_id, setDance_Id] = useState('')
-    const [image, setImage] = useState([]);
     const [cities, setCities] = useState([]);
     const [dances, setDances] = useState([]);
     const [genders, setGenders] = useState([]);
-    const [file, setFile] = useState(null);
+    const [submitted, setSubmitted] = useState(false)
     const [loading, setLoading] = useState(false);
 
-    
+
 
     //Get all cities
 const getCities = async() =>{
     setLoading(true);
     try{
         const response =  await axios.get("http://localhost:3000/api/cities", 
-        {headers: {'Content-Type':'application/json', 'Access-Control-Allow-Origin': '*' }})
+        {headers: {'Content-Type':'application/json', 'Access-Control-Allow-Origin': '*'}})
         console.log(response.data)
         setCities(response.data)
     }catch(error){
@@ -54,7 +55,7 @@ const getGenders = async() =>{
     setLoading(true);
     try{
         const response =  await axios.get("http://localhost:3000/api/genders", 
-        {headers: {'Content-Type':'application/json', 'Access-Control-Allow-Origin': '*' }})
+        {headers: {'Content-Type':'application/json', 'Access-Control-Allow-Origin': '*' }}) 
         console.log(response.data)
         setGenders(response.data)
     }catch(error){
@@ -69,27 +70,20 @@ useEffect(()=>{
     getGenders([])
 }, [])
 
-console.log(image)
-console.log(city_id.cityName)
-console.log(aboutMe)
 
-
-
-const updateForm =async(e)=>{
+const updateForm = async(e)=>{
     console.log('hey')
     e.preventDefault();
+    const payload = {aboutMe, dance_id, city_id, gender_id};
     setLoading(true);
-const formData = new FormData();
-    formData.append('image', image);
-    formData.append('aboutMe', aboutMe);
-    formData.append('city_id', city_id);
-    formData.append('gender_id', gender_id);
-    formData.append('dance_id', dance_id);
 try{
-        const response = await axios.put(`http://localhost:3000/api/profile/update/${id}`, formData, {
-        headers: {'Accept': 'application/json', "Content-Type": "multipart/form-data"  }});
+        const response = await axios.put(`http://localhost:3000/api/profile/update/${user._id}`, payload, {
+        headers: {'Accept': 'application/json', 'Access-Control-Allow-Origin': '*', 'Authorization': `Bearer ${token}`}});
+        if(response.status === 201 ){
+        setSubmitted(true);
         console.log(response.data)
-
+        navigate('/myhomepage');
+    }
 }catch(error){
         console.log("Could not fetch data.");
 }finally{
@@ -97,35 +91,44 @@ try{
 } 
 }
 
+const handleCity = (e) => {
+    e.preventDefault();
+    setCity_Id(e.target.value);
+    console.log(city_id)
+  }
+
+  const handleDance = (e) => {
+    e.preventDefault();
+    setDance_Id(e.target.value);
+    console.log(dance_id)
+  }
+  const handleAboutMe = (e) => {
+    e.preventDefault();
+    setAboutMe(e.target.value);
+    console.log(aboutMe)
+  }
+
+  const handleGender = (e) => {
+    e.preventDefault();
+    setGender_Id(e.target.value);
+    console.log(gender_id)
+  }
 
     return (
-    
 <>
 
 <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-         
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Update your Profile Information
           </h2>
         </div>
-
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form onSubmit={updateForm} className="space-y-6" action="#" method="POST">
-                <div>
-                    <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                        Upload Profile Image
-                    </label>
-              <     div className="mt-2">
-                    <input input type="file"  name="picturePfofile" onChange={(event) => setImage(event.target.files[0])} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                    </div>
-                </div>
-        
+        <form onSubmit={updateForm} className="space-y-6">
                 <div>   
                     <div className="flex items-center justify-between">
-                    <label htmlFor="city" className="block text-sm font-medium leading-6 text-gray-900">
+                    <label onChange={handleCity} htmlFor="city" className="block text-sm font-medium leading-6 text-gray-900">
                     Enter you city
-                    </label>
                         <select>
                         <option value="city">--Please choose an option--</option>
                         {cities.length ? 
@@ -133,14 +136,14 @@ try{
                         <option value={city._id} key ={index}>{city.cityName}</option>
                             )):null}
                         </select>
+                        </label>
                     </div>
                 </div>
 
                 <div>
                     <div className="flex items-center justify-between">
-                    <label htmlFor="dance style" className="block text-sm font-medium leading-6 text-gray-900">
+                    <label onChange={handleDance}htmlFor="dance style" className="block text-sm font-medium leading-6 text-gray-900">
                     Choose your dance styles
-                    </label>
                         <select>
                         <option value="danceStyle">--Please choose an option--</option>
                         {dances.length ? 
@@ -148,23 +151,23 @@ try{
                         <option value={dance._id} key ={index}>{dance.danceName}</option>
                         )):null}
                         </select>
+                        </label>
                     </div>
                 </div>
 
                 <div>
                     <div className="flex items-center justify-between">
-                    <label htmlFor="about me" className="block text-sm font-medium leading-6 text-gray-900">
+                    <label onChange={handleAboutMe} htmlFor="about me" className="block text-sm font-medium leading-6 text-gray-900">
                     About me
-                    </label>
                     <textarea name='aboutMe' />
+                    </label>
                     </div>
                 </div>
 
                 <div>
                     <div className="flex items-center justify-between">
-                    <label htmlFor="dance style" className="block text-sm font-medium leading-6 text-gray-900">
+                    <label onChange={handleGender}htmlFor="dance style" className="block text-sm font-medium leading-6 text-gray-900">
                     You are:
-                    </label>
                         <select>
                         <option value="gender">--Please choose an option--</option>
                         {genders.length ? 
@@ -172,9 +175,10 @@ try{
             <           option value={gender._id} key ={index}> {gender.gender} </option>
                             )):null}
                         </select>
+                        </label>
+
                     </div>
                 </div>
-
                 <div>
                     <button
                     type="submit"
