@@ -18,7 +18,6 @@ const Registration=()=> {
  
 
   const register = async(e) => {
-   console.log('hey')
     e.preventDefault();
     const payload = { userName, email, password };
     setLoading(true);
@@ -55,7 +54,7 @@ const Registration=()=> {
               Enter a username
               </label>
               <div className="mt-2">
-              <input onChange={(e) => setEmail(e.target.value)}  type="text"  required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+              <input onChange={(e) => setUserName(e.target.value)}  type="text"  required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
               </div>
             </div>
 
@@ -66,7 +65,7 @@ const Registration=()=> {
                 </label>
               </div>
               <div className="mt-2">
-              <input onChange={(e) => setPassword(e.target.value)} type="text"  required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+              <input onChange={(e) => setEmail(e.target.value)} type="text"  required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
               </div>
             </div>
 
